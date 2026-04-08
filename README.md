@@ -10,8 +10,8 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 ## 🗺️ Roadmap & Syllabus
 
 ### Module 1: Math Foundations (CORE)
-- [ ] **01. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, and dot products.
-- [ ] **02. Probability & Calculus**: Understanding Softmax, Cross-Entropy, and Gradients.
+- [x] **01. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, and dot products.
+- [x] **02. Probability & Calculus**: Understanding Softmax, Cross-Entropy, and Gradients.
 
 ### Module 2: Building Blocks
 - [ ] **03. Tokenization & Embeddings**: Turning text into numbers (BPE, WordPiece).
