@@ -27,6 +27,14 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - [x] **09. KV Caching**: Optimizing inference speed.
 - [x] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
 
+### Module 5: Pre-Training Mechanics
+- [ ] **11. Next-Token Prediction & Loss**: Cross-Entropy Loss logic.
+- [ ] **12. The Training Loop**: Gradients, Optimizers (AdamW), and Weight Decay.
+
+### Module 6: Fine-Tuning & Alignment
+- [ ] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
+- [ ] **14. DPO Preference Alignment**: Mathematical formulation of DPO.
+
 ## 🛠️ Setup
 ```bash
 # Create a virtual environment
