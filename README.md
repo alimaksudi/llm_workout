@@ -25,7 +25,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 
 ### Module 4: Efficiency & Scaling
 - [x] **09. KV Caching**: Optimizing inference speed.
-- [ ] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
+- [x] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
 
 ## 🛠️ Setup
 ```bash
