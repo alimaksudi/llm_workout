@@ -15,7 +15,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 
 ### Module 2: Building Blocks
 - [x] **03. Tokenization & Embeddings**: Turning text into numbers (BPE, WordPiece).
-- [ ] **04. Positional Encoding**: Injecting sequence order (Sin/Cos vs. RoPE).
+- [x] **04. Positional Encoding**: Injecting sequence order (Sin/Cos vs. RoPE).
 - [ ] **05. Attention Mechanisms**: Scaled Dot-Product, Self-Attention, and Multi-Head Attention.
 
 ### Module 3: Architecture Assembly

@@ -8,3 +8,4 @@ jupyterlab
 pytest
 ipywidgets
 tiktoken
+matplotlib
