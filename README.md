@@ -21,7 +21,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 ### Module 3: Architecture Assembly
 - [x] **06. The Encoder Layer**: Residual connections, LayerNorm, and FFN.
 - [x] **07. The Decoder Layer**: Masked Attention and Cross-Encoder Attention.
-- [ ] **08. Full Transformer**: Putting it all together.
+- [x] **08. Full Transformer**: Putting it all together.
 
 ### Module 4: Efficiency & Scaling
 - [ ] **09. KV Caching**: Optimizing inference speed.
