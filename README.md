@@ -35,6 +35,12 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - [x] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
 - [x] **14. DPO Preference Alignment**: Mathematical formulation of DPO.
 
+### Module 7: Applied LLM Engineering & PEFT
+- [x] **15. LoRA (Low-Rank Adaptation)**: Parameter-efficient fine-tuning mathematics.
+
+### Module 8: Advanced Architecture
+- [x] **16. Mixture of Experts (MoE)**: Routing mathematics for sparse scaling.
+
 ## 🛠️ Setup
 ```bash
 # Create a virtual environment
