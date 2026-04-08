@@ -19,7 +19,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - [x] **05. Attention Mechanisms**: Scaled Dot-Product, Self-Attention, and Multi-Head Attention.
 
 ### Module 3: Architecture Assembly
-- [ ] **06. The Encoder Layer**: Residual connections, LayerNorm, and FFN.
+- [x] **06. The Encoder Layer**: Residual connections, LayerNorm, and FFN.
 - [ ] **07. The Decoder Layer**: Masked Attention and Cross-Encoder Attention.
 - [ ] **08. Full Transformer**: Putting it all together.
 
