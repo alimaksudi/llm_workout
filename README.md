@@ -32,8 +32,8 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - [ ] **12. The Training Loop**: Gradients, Optimizers (AdamW), and Weight Decay.
 
 ### Module 6: Fine-Tuning & Alignment
-- [ ] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
-- [ ] **14. DPO Preference Alignment**: Mathematical formulation of DPO.
+- [x] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
+- [x] **14. DPO Preference Alignment**: Mathematical formulation of DPO.
 
 ## 🛠️ Setup
 ```bash
