@@ -24,7 +24,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - [x] **08. Full Transformer**: Putting it all together.
 
 ### Module 4: Efficiency & Scaling
-- [ ] **09. KV Caching**: Optimizing inference speed.
+- [x] **09. KV Caching**: Optimizing inference speed.
 - [ ] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
 
 ## 🛠️ Setup
