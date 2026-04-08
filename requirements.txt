@@ -1,0 +1,9 @@
+torch
+torchvision
+numpy
+einops
+matplotlib
+seaborn
+jupyterlab
+pytest
+ipywidgets
