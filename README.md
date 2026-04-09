@@ -41,6 +41,9 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 ### Module 8: Advanced Architecture
 - [x] **16. Mixture of Experts (MoE)**: Routing mathematics for sparse scaling.
 
+### Module 9: Hardware Optimization
+- [x] **17. FlashAttention**: Memory tiling and hardware-aware scaling.
+
 ## 🛠️ Setup
 ```bash
 # Create a virtual environment
