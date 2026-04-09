@@ -7,7 +7,15 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 - **Visual Learning**: Every component is accompanied by a Jupyter Notebook explaining the "Why" behind the tensors.
 - **Modern Standards**: We don't just stop at the 2017 paper; we implement Llama-style improvements (RoPE, RMSNorm, SwiGLU).
 
-## 🗺️ Roadmap & Syllabus
+## 📚 Architectural Textbook (Zero to Hero)
+For a deep dive into the mathematical concepts, analogies, and strictly non-code architectural theory driving these Jupyter notebooks, refer to our compiled documentation:
+- [Chapter 1: Mathematics and Structural Building Blocks](./docs/01_math_and_building_blocks.md)
+- [Chapter 2: Architecture Assembly](./docs/02_architecture_assembly.md)
+- [Chapter 3: Efficiency and Scaling](./docs/03_efficiency_and_scaling.md)
+- [Chapter 4: Training and Alignment](./docs/04_training_and_alignment.md)
+- [Chapter 5: Advanced Hardware & Mixture of Experts (MoE)](./docs/05_advanced_hardware_and_moe.md)
+
+## 🗺️ Roadmap & Progress Tracker
 
 ### Module 1: Math Foundations (CORE)
 - [x] **01. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, and dot products.
