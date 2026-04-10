@@ -36,8 +36,8 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [x] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
 
 ### Module 5: Pre-Training Mechanics
-- [ ] **11. Next-Token Prediction & Loss**: Cross-Entropy Loss logic.
-- [ ] **12. The Training Loop**: Gradients, Optimizers (AdamW), and Weight Decay.
+- [x] **11. Next-Token Prediction & Loss**: Cross-Entropy Loss logic.
+- [x] **12. The Training Loop**: Gradients, Optimizers (AdamW), and Weight Decay.
 
 ### Module 6: Fine-Tuning & Alignment
 - [x] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
