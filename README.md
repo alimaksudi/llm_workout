@@ -14,6 +14,7 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [Chapter 3: Efficiency and Scaling](./docs/03_efficiency_and_scaling.md)
 - [Chapter 4: Training and Alignment](./docs/04_training_and_alignment.md)
 - [Chapter 5: Advanced Hardware & Mixture of Experts (MoE)](./docs/05_advanced_hardware_and_moe.md)
+- [Chapter 6: Production and Inference Engineering](./docs/06_production_and_inference.md)
 
 ## 🗺️ Roadmap & Progress Tracker
 
@@ -51,6 +52,11 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 
 ### Module 9: Hardware Optimization
 - [x] **17. FlashAttention**: Memory tiling and hardware-aware scaling.
+
+### Module 10: Production & Inference Engineering
+- [x] **18. Quantization Fundamentals**: Absmax, Zero-Point, and memory savings.
+- [x] **19. Speculative Decoding**: Fast inference with Draft vs. Target models.
+- [x] **20. Continuous Batching**: PagedAttention and KV Cache blocks (vLLM style).
 
 ## 🛠️ Setup
 ```bash
