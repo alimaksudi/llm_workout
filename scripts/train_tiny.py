@@ -67,7 +67,7 @@ def estimate_loss(model):
         losses = torch.zeros(eval_iters)
         for k in range(eval_iters):
             X, Y = get_batch(split)
-            _, loss = model(X, Y)
+            _, loss, _ = model(X, Y)
             losses[k] = loss.item()
         out[split] = losses.mean()
     model.train()
@@ -96,16 +96,21 @@ for iter in range(max_iters):
         losses = estimate_loss(model)
         print(f"Step {iter}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         
-        # Output a sample generation!
+        # Output a sample generation utilizing the new fast KV Cache
+        print(f"\\n--- Generation at Step {iter} ---")
         context = torch.zeros((1, 1), dtype=torch.long, device=device)
-        generated = decode(model.generate(context, max_new_tokens=100)[0].tolist())
-        print(f"\\n--- Generation at Step {iter} ---\\n{generated}\\n--- End ---\\n")
+        
+        # We loop over the generator which yields tokens dynamically via the KV Cache!
+        for token_id in model.generate(context, max_new_tokens=50):
+            print(decode([token_id]), end="", flush=True)
+            
+        print(f"\\n--- End ---\\n")
 
     # Sample a batch of data
     xb, yb = get_batch('train')
 
     # Forward pass and calculate loss
-    logits, loss = model(xb, yb)
+    logits, loss, _ = model(xb, yb)
     
     # Backprop
     optimizer.zero_grad(set_to_none=True)
