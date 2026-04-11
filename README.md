@@ -64,9 +64,20 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies and the local `llm_workout` library
+pip install -e .
 ```
+
+## 🚀 Training Demo
+
+We have extracted the core neural network layers from the notebooks into a modular, production-ready `src/llm_workout/` python library.
+
+You can now train a miniature Transformer from scratch right in your terminal using the TinyShakespeare dataset! This standalone script downloads the data, initializes a Llama-style Decoder-Only model, and streams its learning process to your console:
+
+```bash
+python scripts/train_tiny.py
+```
+
 
 ---
 *Created with ❤️ for the LLM community.*
