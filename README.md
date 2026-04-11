@@ -9,6 +9,7 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 
 ## 📚 Architectural Textbook (Zero to Hero)
 For a deep dive into the mathematical concepts, analogies, and strictly non-code architectural theory driving these Jupyter notebooks, refer to our compiled documentation:
+- [Chapter 0: Prologue - History and Limitations](./docs/00_prologue.md)
 - [Chapter 1: Mathematics and Structural Building Blocks](./docs/01_math_and_building_blocks.md)
 - [Chapter 2: Architecture Assembly](./docs/02_architecture_assembly.md)
 - [Chapter 3: Efficiency and Scaling](./docs/03_efficiency_and_scaling.md)
