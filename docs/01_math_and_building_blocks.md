@@ -16,6 +16,11 @@ In deep learning, all data (text, images, audio) must be converted into numerica
 
 When a Transformer "reads" a sentence, it performs millions of **Dot Products**. A dot product is a mathematical way of measuring how "similar" or "aligned" two vectors are. If the embedding vector for "King" is mathematically pointed in the same direction as "Queen", their dot product will yield a very high number!
 
+### What is a "Parameter"? (The Billion Parameter Question)
+You frequently hear about models being "7B" or "70 Billion Parameters." 
+A **Parameter** is simply a single, learnable floating-point number living inside one of these `Tensor` matrices (like a weight or a bias). 
+When we say a model has 7 Billion parameters, we literally mean there are 7,000,000,000 individual `float16` decimal numbers stored across all of the neural network's Linear/Matrix layers. During training, the optimizer tweaks these exact 7 billion numbers tiny fractions of a percent at a time until they align perfectly to represent the statistical rules of human language!
+
 ## 2. Tokenization & Embeddings
 
 ### Breaking Apart Language
