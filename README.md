@@ -70,9 +70,18 @@ pip install -e .
 
 ## 🚀 Training Demo
 
-We have extracted the core neural network layers from the notebooks into a modular, production-ready `src/llm_workout/` python library.
+We have extracted the core neural network layers from the educational notebooks into a modular, production-ready `src/llm_workout/` python library.
 
-You can now train a miniature Transformer from scratch right in your terminal using the TinyShakespeare dataset! This standalone script downloads the data, initializes a Llama-style Decoder-Only model, and streams its learning process to your console:
+You can import these components directly into your own projects! The architecture uses modernized Llama-3 standards (RMSNorm, SwiGLU):
+```python
+from llm_workout.model import GPT
+from llm_workout.layers import RMSNorm, SwiGLU
+
+# Initialize a custom GPT
+model = GPT(vocab_size=50000, d_model=256, num_layers=4, num_heads=8, hidden_dim=1024)
+```
+
+You can also train a miniature Transformer from scratch right in your terminal using the TinyShakespeare dataset! This standalone script downloads the data and streams its learning process to your console:
 
 ```bash
 python scripts/train_tiny.py
