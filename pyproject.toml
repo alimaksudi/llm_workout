@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm_workout"
+version = "0.1.0"
+description = "A from-scratch educational LLM library and training set."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "LLM Workout" }]
+
+# Core runtime dependencies for the `llm_workout` library and training script.
+dependencies = [
+    "torch",
+    "numpy",
+]
+
+[project.optional-dependencies]
+# Everything needed to run the educational notebooks end-to-end.
+notebooks = [
+    "torchvision",
+    "einops",
+    "matplotlib",
+    "seaborn",
+    "jupyterlab",
+    "ipywidgets",
+    "tiktoken",
+]
+# Tooling for development and the test suite.
+dev = [
+    "pytest",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

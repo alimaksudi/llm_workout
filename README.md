@@ -4,8 +4,10 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 
 ## 📌 Project Goals
 - **Architecture First**: We focus on building the inner workings of Transformers from scratch.
-- **Visual Learning**: Every component is accompanied by a Jupyter Notebook explaining the "Why" behind the tensors.
+- **Visual Learning**: Every component is accompanied by a Jupyter Notebook and a docs chapter (with Mermaid diagrams) explaining the "Why" behind the tensors.
 - **Modern Standards**: We don't just stop at the 2017 paper; we implement Llama-style improvements (RoPE, RMSNorm, SwiGLU).
+
+> **Notebooks teach, the library ships.** The notebooks are deliberately standalone (each re-implements its concept inline so you can run any one in isolation). The `src/llm_workout/` package is the polished, **tested** distillation of those ideas. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how the pieces fit together.
 
 ## 📚 Architectural Textbook (Zero to Hero)
 For a deep dive into the mathematical concepts, analogies, and strictly non-code architectural theory driving these Jupyter notebooks, refer to our compiled documentation:
@@ -30,7 +32,7 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 
 ### Module 3: Architecture Assembly
 - [x] **06. The Encoder Layer**: Residual connections, LayerNorm, and FFN.
-- [x] **07. The Decoder Layer**: Masked Attention and Cross-Encoder Attention.
+- [x] **07. The Decoder Layer**: Masked Attention and Cross-Attention.
 - [x] **08. Full Transformer**: Putting it all together.
 
 ### Module 4: Efficiency & Scaling
@@ -65,8 +67,14 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies and the local `llm_workout` library
+# Install the core library (torch + numpy)
 pip install -e .
+
+# ...or pull in everything needed to run the notebooks:
+pip install -e ".[notebooks]"
+
+# ...or the test/development tooling:
+pip install -e ".[dev]"
 ```
 
 ## 🚀 Training Demo
@@ -88,6 +96,24 @@ You can also train a miniature Transformer from scratch right in your terminal u
 python scripts/train_tiny.py
 ```
 
+When training finishes, the script saves a checkpoint to `checkpoints/tiny_shakespeare.pt`. You can then generate fresh Shakespeare from that checkpoint:
+
+```bash
+python scripts/generate.py --prompt "ROMEO:" --max-new-tokens 300
+```
+
+## 🧪 Testing
+
+The library ships with a Pytest suite that guards the core invariants (shapes, weight tying, and a KV-cache vs. full-forward equivalence check):
+
+```bash
+pip install -e ".[dev]"
+pytest -q
+```
+
+## 🤝 Contributing
+
+Contributions are very welcome — see [CONTRIBUTING.md](./CONTRIBUTING.md) for the project layout, conventions, and how to run the test suite.
 
 ---
 *Created with ❤️ for the LLM community.*
