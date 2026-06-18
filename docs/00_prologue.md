@@ -24,7 +24,7 @@ RNNs understood order. They read text exactly like humans do: left-to-right, one
 2. **The Speed Bottleneck (Sequential Processing):** RNNs were agonizingly slow to train. To process word 100, the GPU *had* to wait for words 1 through 99 to finish processing first. You couldn't use the massive parallel power of modern graphics cards.
 
 > [!TIP]
-> **Why the Transformer Matters:** The 2017 *"Attention Is All You Need"* paper solved both of these problems simultaneously. Instead of reading left-to-right, the Transformer reads the **entire sequence at once** in parallel (solving the speed bottleneck), and it uses the **Attention Mechanism** to allow every word to physically "look" at every other word across infinite distances (solving the amnesia problem).
+> **Why the Transformer Matters:** The 2017 *"Attention Is All You Need"* paper solved both of these problems simultaneously. Instead of reading left-to-right, the Transformer reads the **entire sequence at once** in parallel (solving the speed bottleneck), and it uses the **Attention Mechanism** to allow every word to physically "look" at every other word across the entire sequence/context window (solving the amnesia problem *within a single sequence*).
 
 ---
 
@@ -50,11 +50,22 @@ While Transformers are magical, they are not conscious, and they suffer from sev
 LLMs do not query a database of facts. They are "Autocomplete on steroids", predicting the most statistically likely next word. 
 **The Analogy:** Imagine an incredibly confident, smooth-talking improv actor who desperately hates saying "I don't know." If you ask them a highly technical physics question they don't know the answer to, they won't admit ignorance; they will seamlessly invent physics-sounding words and equations that sound incredibly convincing, but are mathematically entirely fabricated.
 
-### 2. The Context Window Limit (Complete Amnesia)
-An LLM has absolutely no persistent continuous memory. 
-Every time you send a message to ChatGPT, the model crashes back to life, reads the *entire conversation history* from scratch, predicts the next response, sends it, and immediately "dies", forgetting you exist. 
+### 2. The Context Window Limit (No Memory Between Conversations)
+An LLM has no persistent memory that carries across *separate* conversations. It is worth being precise about two very different kinds of "memory":
+- **Within-sequence memory** (remembering earlier words *in the current prompt*): this is exactly the problem the **Attention Mechanism** solves, as we saw above.
+- **Cross-session memory** (remembering you between *different* chats): this never existed in the model itself. Each new conversation starts blank.[^kvcache]
 
-If your conversation gets longer than its designated **Context Window** (e.g., 100,000 words), the oldest messages start getting deleted. The model will suddenly forget rules or names from the beginning of the chat because they physically no longer exist in its memory buffer.
+Every time you send a message, the model re-processes the *entire conversation history so far* and predicts the next response. Once the chat ends, nothing about you persists inside the weights.
+
+If your conversation gets longer than its designated **Context Window** (e.g., 100,000 **tokens** — we define exactly what a "token" is in Chapter 1; for now, think "roughly a word or word-fragment"), the oldest messages start getting dropped. The model will suddenly forget rules or names from the beginning of the chat because they physically no longer fit in its context window.
+
+[^kvcache]: For speed, real serving systems do cache the intermediate computations of the current conversation (the **KV cache**, covered in a later chapter) so the model doesn't recompute earlier tokens from scratch on every turn. This is a performance optimization *within one conversation* — it is not long-term memory and is discarded when the conversation ends.
 
 ### 3. Lack of True Reasoning (Stochastic Parrots)
 While they can write Python code and pass the Bar exam, debate continues on whether LLMs actually "reason" or if they have just memorized the underlying patterns of human reasoning from millions of Reddit threads. They struggle immensely with novel logic puzzles (like playing Wordle or solving unique math riddles) because those tasks require internal trial-and-error backtracking, whereas standard LLMs must predict words relentlessly forward.
+
+---
+
+## Next Up: Chapter 1
+
+Now that you understand *why* the Transformer was invented and where it still falls short, it's time to open the hood. In **Chapter 1: Mathematics and Structural Building Blocks**, we'll define the actual machinery — what a **tensor** is, how text becomes **tokens** and **embeddings**, how **positional encoding** injects word order, and how the **Attention Mechanism** we kept hinting at actually works, math and all.

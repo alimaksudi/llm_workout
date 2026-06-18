@@ -2,33 +2,39 @@
 
 With our building blocks (Embeddings, Positional Encodings, and Multi-Head Attention) complete, we need to wire them together into the macro-structures that define a modern Transformer.
 
+> [!IMPORTANT]
+> **Why we build the full Encoder–Decoder first.** This chapter and notebooks 06–08 build the *historical* 2017 Encoder–Decoder Transformer, because seeing both halves is the clearest way to learn each component. From notebook 09 onward we keep **only the Decoder stack** (the Llama-style, decoder-only design used by every modern chat model). **Cross-Attention in particular will be deleted** — learn it for understanding the original architecture, not because the final model uses it.
+
 ## 1. The Encoder Layer (The Reader)
 
 The Encoder's job is strictly to *understand* what the user typed. It processes all tokens synchronously and outputs a deep map of contexts. It does not predict future words. 
 
 ### The Components
-An Encoder block sequentially passes the data sequentially through internal pipelines:
+An Encoder block passes the data sequentially through internal pipelines:
 1. **Self-Attention**: The words talk to each other to understand context (e.g., resolving ambiguity, knowing that "it" refers to the "cat").
-2. **Feed-Forward Network (FFN)**: An expansion layer where the vector dimensionality is temporarily blown up by a massive factor (like 4x) and pushed through a non-linear activation function (like ReLU or SwiGLU) before shrinking back down. This is effectively where the model stores world "facts" and performs complex non-linear reasoning.
+2. **Feed-Forward Network (FFN)**: An expansion layer where the vector dimensionality is temporarily blown up by a massive factor (like 4x) and pushed through a non-linear activation function (like ReLU, GELU, or SwiGLU) before shrinking back down to its original size. Researchers believe this is where much of the model's factual "world knowledge" lives, and it is where the model performs complex non-linear reasoning.
 
 ### Residual Connections & LayerNorm
-Deep neural networks suffer from the "Vanishing Gradient Problem," where information mathematically zeroes out as it travels consecutively through 90+ layers.
+Deep neural networks suffer from the **Vanishing Gradient Problem**: during backpropagation, the *gradient* (the training signal that tells early layers how to improve) shrinks as it is multiplied back layer by layer. This bites long before you reach 90 layers — even a few dozen stacked sublayers can make early layers nearly impossible to train.
 
 > [!TIP]
-> **The Highway Analogy**: A Residual Connection acts as a high-speed bypass lane. The raw input data is given a dedicated fast lane to literally bypass the Self-Attention block and merge back directly with the output. This guarantees that the original prompt's message is never fully diluted!
+> **The Editor Analogy** (same as notebook 06): think of your input vector as a *draft*. The sublayer (Attention or FFN) doesn't replace the draft — it proposes a set of *edits*. We compute `out = x + edits`, i.e. we add the edits back onto the original draft. If the edits are bad, the model can learn to ignore them and keep the draft intact. This addition is the "residual connection," and during backpropagation it gives the gradient an uninterrupted highway straight back to the embeddings.
 
-**Layer Normalization** smooths out the numerical values so they don't spiral into infinity (NaN divergence errors), forcing the mean of the numbers to 0 and the variance to 1.
+> [!NOTE]
+> The residual `x + sublayer(x)` only works if the sublayer's output has the **same dimension** as its input, so the two can be added. That is why `d_model` is preserved everywhere, and why the FFN expands to 4× internally but always shrinks back to `d_model` before the addition.
+
+**Layer Normalization** smooths out the numerical values so they don't spiral into infinity (NaN divergence errors). Standard LayerNorm forces each vector to have mean 0 and variance 1. (Note: modern models often use **RMSNorm** instead, which only rescales magnitude and does *not* center the mean — see notebook 06.)
 
 ```mermaid
 graph TD
-    Input -->|Route 1| Attn[Multi-Head Attention]
-    Input -->|Route 2: Highway Bypass| Add1{+ Add}
-    Attn --> Add1
+    Input -->|the draft| Attn[Multi-Head Attention]
+    Input -->|residual: keep the draft| Add1{+ Add}
+    Attn -->|the edits| Add1
     Add1 --> Norm1[LayerNorm]
     
-    Norm1 -->|Route 1| FFN[Feed Forward]
-    Norm1 -->|Route 2: Highway Bypass| Add2{+ Add}
-    FFN --> Add2
+    Norm1 -->|the draft| FFN[Feed Forward]
+    Norm1 -->|residual: keep the draft| Add2{+ Add}
+    FFN -->|the edits| Add2
     Add2 --> Norm2[LayerNorm]
     Norm2 --> Output
 ```
@@ -41,7 +47,7 @@ The Decoder's job is autoregressive **generation**. It writes the story word by 
 Because it generates sequentially, the Decoder is strictly forbidden from "looking into the future." If predicting word 4, it can mathematically only look backward at words 1, 2, and 3.
 
 We enforce this using a **Lower Triangular Mask**.
-We take the $N \\times N$ attention score matrix and manually overwrite the entire top-right triangle with negative infinity (`-inf`). When passed through a Softmax function, `-inf` becomes precisely `0.0`. 
+We take the $N \\times N$ attention score matrix and manually overwrite the entire top-right triangle with a very large negative number. In code we use `-1e9` (a stand-in for `-inf`, matching the notebooks) rather than a literal `-inf`, which keeps the math numerically stable. When passed through a Softmax function, such a large negative score becomes effectively `0.0`. 
 
 **The Exam Analogy:** The mask is like placing a piece of dense cardboard over the test answers you haven't written yet. You can only read your past answers!
 
