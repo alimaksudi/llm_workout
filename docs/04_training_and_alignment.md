@@ -34,7 +34,7 @@ We wrap the data in special formatting tokens (like `<|im_start|>user\n Hello <|
 
 ### Loss Masking
 During SFT, we do *not* want the model to learn to predict the User's prompts — we only want it to learn to predict the Assistant's replies.
-The mechanism is simple: for every token that belongs to the user/prompt portion, we set its target label to the special `ignore_index` value of `-100`. PyTorch's cross-entropy function skips any target equal to `ignore_index`, so those tokens contribute zero loss. Only the assistant's tokens produce gradients, so the model is graded only on its own responses. (This is the same Cross-Entropy and label-shifting machinery from Notebooks 11 and 13, just with some target labels blanked out.)
+The mechanism is simple: for every token that belongs to the user/prompt portion, we set its target label to the special `ignore_index` value of `-100`. PyTorch's cross-entropy function skips any target equal to `ignore_index`, so those tokens contribute zero loss. Only the assistant's tokens produce gradients, so the model is graded only on its own responses. (This is the same Cross-Entropy and label-shifting machinery from Notebooks 11 and 16, just with some target labels blanked out.)
 
 ## Phase 3: Alignment (DPO/RLHF)
 

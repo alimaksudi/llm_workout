@@ -3,7 +3,7 @@
 With our building blocks (Embeddings, Positional Encodings, and Multi-Head Attention) complete, we need to wire them together into the macro-structures that define a modern Transformer.
 
 > [!IMPORTANT]
-> **Why we build the full Encoder–Decoder first.** This chapter and notebooks 06–08 build the *historical* 2017 Encoder–Decoder Transformer, because seeing both halves is the clearest way to learn each component. From notebook 09 onward we keep **only the Decoder stack** (the Llama-style, decoder-only design used by every modern chat model). **Cross-Attention in particular will be deleted** — learn it for understanding the original architecture, not because the final model uses it.
+> **Why we build the full Encoder–Decoder first.** This chapter and notebooks 08–10 build the *historical* 2017 Encoder–Decoder Transformer, because seeing both halves is the clearest way to learn each component. From the full Transformer (notebook 10) onward we keep **only the Decoder stack** (the Llama-style, decoder-only design used by every modern chat model). **Cross-Attention in particular will be deleted** — learn it for understanding the original architecture, not because the final model uses it.
 
 ## 1. The Encoder Layer (The Reader)
 
@@ -18,12 +18,12 @@ An Encoder block passes the data sequentially through internal pipelines:
 Deep neural networks suffer from the **Vanishing Gradient Problem**: during backpropagation, the *gradient* (the training signal that tells early layers how to improve) shrinks as it is multiplied back layer by layer. This bites long before you reach 90 layers — even a few dozen stacked sublayers can make early layers nearly impossible to train.
 
 > [!TIP]
-> **The Editor Analogy** (same as notebook 06): think of your input vector as a *draft*. The sublayer (Attention or FFN) doesn't replace the draft — it proposes a set of *edits*. We compute `out = x + edits`, i.e. we add the edits back onto the original draft. If the edits are bad, the model can learn to ignore them and keep the draft intact. This addition is the "residual connection," and during backpropagation it gives the gradient an uninterrupted highway straight back to the embeddings.
+> **The Editor Analogy** (same as notebook 08): think of your input vector as a *draft*. The sublayer (Attention or FFN) doesn't replace the draft — it proposes a set of *edits*. We compute `out = x + edits`, i.e. we add the edits back onto the original draft. If the edits are bad, the model can learn to ignore them and keep the draft intact. This addition is the "residual connection," and during backpropagation it gives the gradient an uninterrupted highway straight back to the embeddings.
 
 > [!NOTE]
 > The residual `x + sublayer(x)` only works if the sublayer's output has the **same dimension** as its input, so the two can be added. That is why `d_model` is preserved everywhere, and why the FFN expands to 4× internally but always shrinks back to `d_model` before the addition.
 
-**Layer Normalization** smooths out the numerical values so they don't spiral into infinity (NaN divergence errors). Standard LayerNorm forces each vector to have mean 0 and variance 1. (Note: modern models often use **RMSNorm** instead, which only rescales magnitude and does *not* center the mean — see notebook 06.)
+**Layer Normalization** smooths out the numerical values so they don't spiral into infinity (NaN divergence errors). Standard LayerNorm forces each vector to have mean 0 and variance 1. (Note: modern models often use **RMSNorm** instead, which only rescales magnitude and does *not* center the mean — see notebook 08.)
 
 ```mermaid
 graph TD

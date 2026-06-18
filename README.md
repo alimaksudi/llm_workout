@@ -21,45 +21,54 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 
 ## 🗺️ Roadmap & Progress Tracker
 
-### Module 1: Math Foundations (CORE)
-- [x] **01. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, and dot products.
-- [x] **02. Probability & Calculus**: Understanding Softmax, Cross-Entropy, and Gradients.
+> The full learning path — with prerequisites and learning outcomes for every
+> module — lives in **[CURRICULUM.md](./CURRICULUM.md)**. Work through the
+> notebooks in order; each ends with a "🏋️ Try it yourself" exercise.
 
-### Module 2: Building Blocks
-- [x] **03. Tokenization & Embeddings**: Turning text into numbers (BPE, WordPiece).
-- [x] **04. Positional Encoding**: Injecting sequence order (Sin/Cos vs. RoPE).
-- [x] **05. Attention Mechanisms**: Scaled Dot-Product, Self-Attention, and Multi-Head Attention.
+### Part 0: Foundations & Setup
+- [x] **01. Setup & a PyTorch Crash Course**: Tensors, broadcasting, matmul, autograd.
+- [x] **02. Neural Networks in 30 Minutes**: Neurons, parameters, gradient descent, training a tiny net.
 
-### Module 3: Architecture Assembly
-- [x] **06. The Encoder Layer**: Residual connections, LayerNorm, and FFN.
-- [x] **07. The Decoder Layer**: Masked Attention and Cross-Attention.
-- [x] **08. Full Transformer**: Putting it all together.
+### Part 1: Mathematical Building Blocks
+- [x] **03. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, dot products.
+- [x] **04. Probability & Calculus**: Softmax, cross-entropy, gradients.
 
-### Module 4: Efficiency & Scaling
-- [x] **09. KV Caching**: Optimizing inference speed.
-- [x] **10. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
+### Part 2: From Text to Vectors
+- [x] **05. Tokenization & Embeddings**: Turning text into vectors (BPE, embedding space).
+- [x] **06. Positional Encoding**: Injecting sequence order (Sin/Cos vs. RoPE).
 
-### Module 5: Pre-Training Mechanics
-- [x] **11. Next-Token Prediction & Loss**: Cross-Entropy Loss logic.
-- [x] **12. The Training Loop**: Gradients, Optimizers (AdamW), and Weight Decay.
+### Part 3: The Attention Engine
+- [x] **07. Attention Mechanisms**: Scaled dot-product, self-attention, multi-head, causal masking.
 
-### Module 6: Fine-Tuning & Alignment
-- [x] **13. Supervised Fine-Tuning (SFT)**: Transitioning to Chatbot format.
-- [x] **14. DPO Preference Alignment**: Mathematical formulation of DPO.
+### Part 4: Assembling the Transformer
+- [x] **08. The Encoder Layer**: Residual connections, RMSNorm, and the FFN.
+- [x] **09. The Decoder Layer**: Masked attention and (historical) cross-attention.
+- [x] **10. The Full Transformer**: Putting it all together (decoder-only).
 
-### Module 7: Applied LLM Engineering & PEFT
-- [x] **15. LoRA (Low-Rank Adaptation)**: Parameter-efficient fine-tuning mathematics.
+### Part 5: Training Your Model
+- [x] **11. Next-Token Prediction & Cross-Entropy Loss**: How wrongness is measured.
+- [x] **12. The Training Loop**: AdamW, backprop, the optimization step.
+- [x] **13. Train Your Own GPT (Capstone)**: Train the model you built, end to end.
+- [x] **14. Decoding & Sampling**: Greedy, temperature, top-k, top-p, repetition penalty.
+- [x] **15. Evaluating a Language Model**: Perplexity, held-out loss, benchmarks.
 
-### Module 8: Advanced Architecture
-- [x] **16. Mixture of Experts (MoE)**: Routing mathematics for sparse scaling.
+### Part 6: Fine-Tuning & Alignment
+- [x] **16. Supervised Fine-Tuning (SFT)**: Turning a base model into a chatbot.
+- [x] **17. Parameter-Efficient Fine-Tuning (LoRA)**: Cheap fine-tuning with low-rank adapters.
+- [x] **18. Preference Alignment (DPO)**: Aligning to human preferences.
 
-### Module 9: Hardware Optimization
-- [x] **17. FlashAttention**: Memory tiling and hardware-aware scaling.
+### Part 7: Inference Optimization
+- [x] **19. KV Caching**: Optimizing autoregressive generation speed.
+- [x] **20. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
+- [x] **21. FlashAttention**: Memory tiling and hardware-aware attention.
 
-### Module 10: Production & Inference Engineering
-- [x] **18. Quantization Fundamentals**: Absmax, Zero-Point, and memory savings.
-- [x] **19. Speculative Decoding**: Fast inference with Draft vs. Target models.
-- [x] **20. Continuous Batching**: PagedAttention and KV Cache blocks (vLLM style).
+### Part 8: Scaling the Architecture
+- [x] **22. Mixture of Experts (MoE)**: Sparse routing for scaling.
+
+### Part 9: Production & Serving
+- [x] **23. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
+- [x] **24. Speculative Decoding**: Fast inference with draft vs. target models.
+- [x] **25. PagedAttention & Continuous Batching**: vLLM-style serving.
 
 ## 🛠️ Setup
 ```bash

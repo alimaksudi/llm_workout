@@ -133,43 +133,41 @@ Legend: ✅ exists today · 🔵 exists, **moves** in the new order · 🟢 **ne
 
 ---
 
-## Appendix A — Old → new mapping (for the rebuild)
+## Appendix A — Module → notebook file map
 
-The renumber needed to realize the order above. **Content stays; only sequence + 5 new items change.**
+The notebook files are numbered to follow this curriculum order.
 
-| New | Module | Current file |
+| Module | Topic | Notebook file |
 | --- | --- | --- |
 | 0.0 | Prologue | `docs/00_prologue.md` |
-| 0.1 | Setup & PyTorch crash course | 🟢 new |
-| 0.2 | Neural networks in 30 min | 🟢 new |
-| 1.1 | Tensors & linear algebra | `01_math_foundations` |
-| 1.2 | Probability & calculus | `02_probability_and_calculus` |
-| 2.1 | Tokenization & embeddings | `03_tokenization_and_embeddings` |
-| 2.2 | Positional encoding | `04_positional_encoding` |
-| 3.1 | Attention | `05_attention_mechanisms` |
-| 4.1 | Encoder layer | `06_the_encoder_layer` |
-| 4.2 | Decoder layer | `07_the_decoder_layer` |
-| 4.3 | Full transformer | `08_full_transformer` |
-| 5.1 | Loss | `11_cross_entropy_loss` |
-| 5.2 | Training loop | `12_the_training_loop` |
-| 5.3 | Capstone: train your GPT | 🟢 new (from `scripts/train_tiny.py`) |
-| 5.4 | Decoding & sampling | 🟢 new |
-| 5.5 | Evaluation | 🟢 new |
-| 6.1 | SFT | `13_supervised_fine_tuning` |
-| 6.2 | LoRA | `15_peft_and_lora` |
-| 6.3 | DPO | `14_dpo_preference_alignment` |
-| 7.1 | KV caching | `09_kv_caching` |
-| 7.2 | MQA/GQA | `10_advanced_attention` |
-| 7.3 | FlashAttention | `17_flash_attention` |
-| 8.1 | MoE | `16_mixture_of_experts` |
-| 8.2 | Scaling laws | 🟢 new (stretch) |
-| 9.1 | Quantization | `18_quantization_fundamentals` |
-| 9.2 | Speculative decoding | `19_speculative_decoding` |
-| 9.3 | PagedAttention | `20_paged_attention` |
+| 0.1 | Setup & PyTorch crash course | `notebooks/01_setup_and_pytorch.ipynb` |
+| 0.2 | Neural networks in 30 min | `notebooks/02_neural_networks_in_30_min.ipynb` |
+| 1.1 | Tensors & linear algebra | `notebooks/03_math_foundations.ipynb` |
+| 1.2 | Probability & calculus | `notebooks/04_probability_and_calculus.ipynb` |
+| 2.1 | Tokenization & embeddings | `notebooks/05_tokenization_and_embeddings.ipynb` |
+| 2.2 | Positional encoding | `notebooks/06_positional_encoding.ipynb` |
+| 3.1 | Attention | `notebooks/07_attention_mechanisms.ipynb` |
+| 4.1 | Encoder layer | `notebooks/08_the_encoder_layer.ipynb` |
+| 4.2 | Decoder layer | `notebooks/09_the_decoder_layer.ipynb` |
+| 4.3 | Full transformer | `notebooks/10_full_transformer.ipynb` |
+| 5.1 | Loss | `notebooks/11_cross_entropy_loss.ipynb` |
+| 5.2 | Training loop | `notebooks/12_the_training_loop.ipynb` |
+| 5.3 | Capstone: train your GPT | `notebooks/13_train_your_own_gpt.ipynb` |
+| 5.4 | Decoding & sampling | `notebooks/14_decoding_and_sampling.ipynb` |
+| 5.5 | Evaluation | `notebooks/15_evaluating_a_language_model.ipynb` |
+| 6.1 | SFT | `notebooks/16_supervised_fine_tuning.ipynb` |
+| 6.2 | LoRA | `notebooks/17_peft_and_lora.ipynb` |
+| 6.3 | DPO | `notebooks/18_dpo_preference_alignment.ipynb` |
+| 7.1 | KV caching | `notebooks/19_kv_caching.ipynb` |
+| 7.2 | MQA/GQA | `notebooks/20_advanced_attention.ipynb` |
+| 7.3 | FlashAttention | `notebooks/21_flash_attention.ipynb` |
+| 8.1 | MoE | `notebooks/22_mixture_of_experts.ipynb` |
+| 8.2 | Scaling laws | 🟢 not yet written (stretch) |
+| 9.1 | Quantization | `notebooks/23_quantization_fundamentals.ipynb` |
+| 9.2 | Speculative decoding | `notebooks/24_speculative_decoding.ipynb` |
+| 9.3 | PagedAttention | `notebooks/25_paged_attention.ipynb` |
 
-**Summary of changes:** add 4–5 new modules (0.1, 0.2, 5.3, 5.4, 5.5, + optional 8.2);
-move training (loss/loop) ahead of inference optimization; move LoRA next to SFT;
-move KV-cache/MQA/GQA/Flash into a post-training inference block.
+> Module 8.2 (Scaling laws) is the one planned module not yet written.
 
 ## Appendix B — Out of scope (a future "Applied LLM" track)
 
