@@ -120,7 +120,7 @@ Legend: ✅ exists today · 🔵 exists, **moves** in the new order · 🟢 **ne
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
 | 8.1 | **Mixture of Experts (MoE)** | 7.x | sparse routing, top-k experts, load balancing | explain sparse scaling (Mixtral-style) | ✅ (`NB16`) |
-| 8.2 | **Scaling laws** *(optional/stretch)* | 8.1 | params × data × compute, Chinchilla intuition | reason about *why* bigger+more-data helps | 🟢 new (stretch) |
+| 8.2 | **Scaling laws** | 8.1 | params × data × compute, Chinchilla-optimal budgets | reason about *why* bigger+more-data helps and how to spend compute | ✅ (`NB23`) |
 
 ### Part 9 — Production & Serving
 *Goal: the systems that make serving an LLM viable. (Simulations, not a full server — see scope note.)*
@@ -162,12 +162,10 @@ The notebook files are numbered to follow this curriculum order.
 | 7.2 | MQA/GQA | `notebooks/20_advanced_attention.ipynb` |
 | 7.3 | FlashAttention | `notebooks/21_flash_attention.ipynb` |
 | 8.1 | MoE | `notebooks/22_mixture_of_experts.ipynb` |
-| 8.2 | Scaling laws | 🟢 not yet written (stretch) |
-| 9.1 | Quantization | `notebooks/23_quantization_fundamentals.ipynb` |
-| 9.2 | Speculative decoding | `notebooks/24_speculative_decoding.ipynb` |
-| 9.3 | PagedAttention | `notebooks/25_paged_attention.ipynb` |
-
-> Module 8.2 (Scaling laws) is the one planned module not yet written.
+| 8.2 | Scaling laws | `notebooks/23_scaling_laws.ipynb` |
+| 9.1 | Quantization | `notebooks/24_quantization_fundamentals.ipynb` |
+| 9.2 | Speculative decoding | `notebooks/25_speculative_decoding.ipynb` |
+| 9.3 | PagedAttention | `notebooks/26_paged_attention.ipynb` |
 
 ## Appendix B — Out of scope (a future "Applied LLM" track)
 

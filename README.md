@@ -64,11 +64,12 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 
 ### Part 8: Scaling the Architecture
 - [x] **22. Mixture of Experts (MoE)**: Sparse routing for scaling.
+- [x] **23. Scaling Laws**: Why params × data × compute work, and Chinchilla-optimal budgets.
 
 ### Part 9: Production & Serving
-- [x] **23. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
-- [x] **24. Speculative Decoding**: Fast inference with draft vs. target models.
-- [x] **25. PagedAttention & Continuous Batching**: vLLM-style serving.
+- [x] **24. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
+- [x] **25. Speculative Decoding**: Fast inference with draft vs. target models.
+- [x] **26. PagedAttention & Continuous Batching**: vLLM-style serving.
 
 ## 🛠️ Setup
 ```bash
