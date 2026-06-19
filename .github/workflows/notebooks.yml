@@ -1,0 +1,55 @@
+name: Notebooks
+
+# Execute every teaching notebook end-to-end so they never silently break.
+# Scoped to changes that can affect notebook execution to save CI minutes.
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - "notebooks/**"
+      - "src/**"
+      - "pyproject.toml"
+      - ".github/workflows/notebooks.yml"
+  pull_request:
+    paths:
+      - "notebooks/**"
+      - "src/**"
+      - "pyproject.toml"
+      - ".github/workflows/notebooks.yml"
+
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package (CPU torch) and notebook stack
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[notebooks]"
+
+      - name: Execute all notebooks
+        run: |
+          set -e
+          fail=0
+          for nb in notebooks/*.ipynb; do
+            echo "::group::$nb"
+            if jupyter nbconvert --to notebook --execute \
+                 --ExecutePreprocessor.timeout=600 \
+                 --output-dir /tmp/executed "$nb"; then
+              echo "PASS $nb"
+            else
+              echo "::error file=$nb::Notebook failed to execute"
+              fail=1
+            fi
+            echo "::endgroup::"
+          done
+          exit $fail

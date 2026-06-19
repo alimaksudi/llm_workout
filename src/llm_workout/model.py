@@ -68,10 +68,23 @@ class GPT(nn.Module):
         kv_caches: Optional[List[Tuple[torch.Tensor, torch.Tensor]]] = None
     ):
         B, T = idx.size()
-        
+
+        # Guard: RoPE frequencies are precomputed up to max_seq_len. The position
+        # we reach is start_pos + T (start_pos > 0 during cached generation), and it
+        # must fit inside that buffer. Without this check an over-long sequence slices
+        # a too-short freqs_cis and fails with an opaque broadcast assertion deep in
+        # apply_rotary_emb. max_seq_len must cover prompt length + tokens generated.
+        max_pos = self.freqs_cis.size(0)  # type: ignore
+        if start_pos + T > max_pos:
+            raise ValueError(
+                f"Sequence reaches position {start_pos + T}, which exceeds the model's "
+                f"max_seq_len ({max_pos}). Construct GPT with a larger max_seq_len: it must "
+                f"cover the prompt length plus the number of tokens you intend to generate."
+            )
+
         # 1. Lookup Embeddings (No absolute positional embeddings added!)
         x = self.token_embedding(idx)
-        
+
         # 2. Slice out only the RoPE frequencies we need for this forward pass length
         freqs_cis = self.freqs_cis[start_pos : start_pos + T] # type: ignore
         
