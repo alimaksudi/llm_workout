@@ -18,27 +18,46 @@ is that missing half.
 | You learn to | build the model | build products on top of models |
 | Mindset | "how does it work inside?" | "how do I make it reliable, grounded, cheap, safe?" |
 
-## A design decision to settle first
+## Confirmed decisions
 
-Part I is **from-scratch and dependency-light** (essentially just PyTorch). Part II
-inherently touches the outside world — model APIs, vector indexes, eval harnesses,
-serving infra. Two ways to teach it:
+- **Build philosophy: from-scratch-first.** Build a tiny version of each idea with
+  minimal dependencies (a brute-force vector index in NumPy, a hand-rolled RAG
+  pipeline, eval metrics computed by hand), *then* point to the real production
+  tool. Keeps the course's "understand by building" DNA.
+- **Model access: local small model by default, optional hosted API.** Labs run
+  free and reproducible on small *pretrained* models; an optional OpenAI-compatible
+  path is shown (commented) for stronger output. (Part I's from-scratch char model
+  can't follow instructions or embed arbitrary text, so Part II uses pretrained
+  models as black boxes — the *systems* around them are what we build.)
+- **First scope: the RAG spine (Sections A–E).** Using LLMs → Prompting →
+  Embeddings/Search → RAG → Evaluation. Agents (F) and Production (G) come later.
+- **Numbering:** continues the flat scheme — Part II notebooks are `27+` in
+  `notebooks/`.
 
-- **A. From-scratch-first (recommended).** Build a tiny version of each idea with
-  minimal dependencies (e.g., a brute-force vector index in NumPy, a hand-rolled
-  ReAct loop), *then* point to the real tool people use in production. Keeps the
-  course's "understand by building" DNA and avoids framework churn.
-- **B. Tool-first.** Teach directly with the popular stack (a hosted LLM API, a
-  vector DB, an agent framework). Faster to "real," but dates quickly and hides
-  the mechanics.
+### Verified local stack (probed, works on CPU)
 
-This outline assumes **Option A**. A further sub-decision: whether hands-on labs
-may call a **hosted LLM API** (needs a key, costs cents) or must run a **local
-small model** (free, reproducible, weaker). Recommendation: make labs work with a
-local model by default and offer an optional hosted-API path.
+| Need | Choice | Notes |
+| --- | --- | --- |
+| Embeddings | `sentence-transformers` · `all-MiniLM-L6-v2` (~80 MB, 384-dim) | semantic search ranks correctly; index built from scratch in NumPy |
+| Generation | `transformers` · `HuggingFaceTB/SmolLM2-135M-Instruct` (~270 MB) | loads on CPU, ~0.6 s/short answer; weak but coherent enough to show mechanics |
+| Reranking | `cross-encoder/ms-marco-MiniLM-L-6-v2` | small cross-encoder for Section D.4 |
+| Optional API | `openai` (OpenAI-compatible) | better output; needs a key; never required to run a lab |
 
-> ⚠️ These two choices change a lot of the content. They should be confirmed
-> before building.
+Installed via `pip install -e ".[applied]"`. Because these labs download models and
+are slower, Part II notebooks run in a **separate CI lane** from the strict Part I
+notebook-execution check.
+
+### Build plan (Sections A–E consolidated into notebooks)
+
+| Notebook | Covers | Needs |
+| --- | --- | --- |
+| `27_calling_a_model` | A.1 Calling a model + A.2 decoding in practice | local LLM |
+| `28_structured_output` | A.3 JSON / schema output + validation + retries | local LLM |
+| `29_prompt_engineering` | B.1 zero/few-shot · B.2 chain-of-thought · B.3 reliability | local LLM |
+| `30_embeddings_and_semantic_search` | C.1 embeddings · C.2 from-scratch search · C.3 clustering | embeddings |
+| `31_rag_retrieval` | D.1 why RAG · D.2 chunking · D.3 dense/keyword/hybrid retrieval | embeddings |
+| `32_rag_generation` | D.4 reranking · D.5 context construction · D.6 end-to-end capstone | embeddings + LLM |
+| `33_evaluating_llm_systems` | E.1–E.4 groundedness/faithfulness, LLM-as-judge, hallucination, regression | LLM |
 
 ---
 
@@ -126,11 +145,8 @@ suite gating changes (Part E), a tool/agent step (Part F), and caching +
 guardrails + tracing (Part G). Ideally it can use the model the student trained in
 Part I as the (small, local) generator, closing the loop across both tracks.
 
-## Open questions to confirm before building
+## Status
 
-1. **Build philosophy:** Option A (from-scratch-first) or B (tool-first)?
-2. **Model access:** local small model by default, hosted API, or both?
-3. **Scope/length:** all of Parts A–G, or a focused subset first (e.g., A–E, the
-   highest-value "prompt → search → RAG → eval" spine)?
-4. **Numbering:** continue the flat notebook numbering (27+) or start Part II in a
-   separate `notebooks/part2/` directory?
+Build decisions are confirmed (see above) and the local stack is verified.
+Building Sections **A–E** as notebooks `27–33`. Sections **F (Agents)** and
+**G (Production)** remain outlined-but-unbuilt, to follow once the spine lands.

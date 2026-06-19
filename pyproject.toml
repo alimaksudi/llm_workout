@@ -32,6 +32,15 @@ notebooks = [
 dev = [
     "pytest",
 ]
+# Part II (Applied LLM Engineering): pretrained models for embeddings/generation.
+# These notebooks use small *pretrained* models (the Part I from-scratch model
+# can't follow instructions or embed arbitrary text). The hosted-API path is
+# optional — labs run locally by default.
+applied = [
+    "sentence-transformers",  # embeddings for semantic search / RAG (local)
+    "transformers",           # small local instruct model for generation
+    "openai",                 # optional: hosted-API path for generation labs
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
