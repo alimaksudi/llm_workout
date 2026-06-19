@@ -71,6 +71,32 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [x] **25. Speculative Decoding**: Fast inference with draft vs. target models.
 - [x] **26. PagedAttention & Continuous Batching**: vLLM-style serving.
 
+---
+
+## Part II: Applied LLM Engineering
+
+> You built the model. Now build systems that *use* it — prompting, retrieval, RAG, evaluation.
+> Requires `pip install -e ".[applied]"`. See [CURRICULUM_PART_II.md](./CURRICULUM_PART_II.md) for the full blueprint.
+
+### Part A: Using LLMs in Practice
+- [x] **27. Calling a Model**: Chat interface, roles, tokens, temperature, streaming.
+- [x] **28. Structured Output**: JSON prompting, parsing, schema validation, retries, Pydantic.
+
+### Part B: Prompt Engineering
+- [x] **29. Prompt Engineering**: Zero/few-shot, chain-of-thought, self-consistency, reliability, injection defense.
+
+### Part C: Embeddings & Semantic Search
+- [x] **30. Embeddings & Semantic Search**: Sentence embeddings, cosine similarity, brute-force vector index, k-means, PCA visualization.
+
+### Part D: Retrieval-Augmented Generation (RAG)
+- [x] **31. RAG — Retrieval**: Why RAG, chunking strategies, dense search, BM25 from scratch, hybrid RRF retrieval.
+- [x] **32. RAG — Generation (Capstone)**: Cross-encoder reranking, context construction, lost-in-the-middle, citations, end-to-end RAG system.
+
+### Part E: Evaluating LLM Systems
+- [x] **33. Evaluating LLM Systems**: Exact match, token F1, semantic similarity, faithfulness, LLM-as-judge, hallucination detection, regression testing.
+
+---
+
 ## 🛠️ Setup
 ```bash
 # Create a virtual environment
@@ -85,6 +111,9 @@ pip install -e ".[notebooks]"
 
 # ...or the test/development tooling:
 pip install -e ".[dev]"
+
+# Part II — Applied LLM Engineering (embeddings + local LLM):
+pip install -e ".[applied]"
 ```
 
 ## 🚀 Training Demo
