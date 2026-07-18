@@ -31,7 +31,7 @@ is that missing half.
   models as black boxes — the *systems* around them are what we build.)
 - **First scope: the RAG spine (Sections A–E).** Using LLMs → Prompting →
   Embeddings/Search → RAG → Evaluation. Agents (F) and Production (G) come later.
-- **Numbering:** continues the flat scheme — Part II notebooks are `27+` in
+- **Numbering:** continues the flat scheme — Part II notebooks are `30+` in
   `notebooks/`.
 
 ### Verified local stack (probed, works on CPU)
@@ -51,13 +51,13 @@ notebook-execution check.
 
 | Notebook | Covers | Needs |
 | --- | --- | --- |
-| `27_calling_a_model` | A.1 Calling a model + A.2 decoding in practice | local LLM |
-| `28_structured_output` | A.3 JSON / schema output + validation + retries | local LLM |
-| `29_prompt_engineering` | B.1 zero/few-shot · B.2 chain-of-thought · B.3 reliability | local LLM |
-| `30_embeddings_and_semantic_search` | C.1 embeddings · C.2 from-scratch search · C.3 clustering | embeddings |
-| `31_rag_retrieval` | D.1 why RAG · D.2 chunking · D.3 dense/keyword/hybrid retrieval | embeddings |
-| `32_rag_generation` | D.4 reranking · D.5 context construction · D.6 end-to-end capstone | embeddings + LLM |
-| `33_evaluating_llm_systems` | E.1–E.4 groundedness/faithfulness, LLM-as-judge, hallucination, regression | LLM |
+| `30_calling_a_model` | A.1 Calling a model + A.2 decoding in practice | local LLM |
+| `31_structured_output` | A.3 JSON / schema output + validation + retries | local LLM |
+| `32_prompt_engineering` | B.1 zero/few-shot · B.2 chain-of-thought · B.3 reliability | local LLM |
+| `33_embeddings_and_semantic_search` | C.1 embeddings · C.2 from-scratch search · C.3 clustering | embeddings |
+| `34_rag_retrieval` | D.1 why RAG · D.2 chunking · D.3 dense/keyword/hybrid retrieval | embeddings |
+| `35_rag_generation` | D.4 reranking · D.5 context construction · D.6 end-to-end capstone | embeddings + LLM |
+| `36_evaluating_llm_systems` | E.1–E.4 groundedness/faithfulness, LLM-as-judge, hallucination, regression | LLM |
 
 ---
 

@@ -21,7 +21,7 @@ Neural networks are typically trained in 32-bit (FP32) or 16-bit (FP16/BF16) flo
 
 By compressing the weights to 8-bit, we halve the size of the model in VRAM and can load weights across the memory bus up to ~2x faster. Note that this is a best-case figure for the weight-transfer step itself: end-to-end generation throughput rarely doubles, because dequantization, activations, and the KV cache all add overhead that 8-bit weights do not shrink. However, this is a "lossy compression". The mathematical challenge, addressed by algorithms like **GPTQ** or **AWQ**, is finding ways to represent numbers with very few integer buckets without the neural network losing its accuracy.
 
-*(Refer to `notebooks/18_quantization_fundamentals.ipynb` for the implementation of Absmax and Asymmetric Quantization)*
+*(Refer to `notebooks/26_quantization_fundamentals.ipynb` for the implementation of Absmax and Asymmetric Quantization)*
 
 ## Speculative Decoding: The Manager and the Assistant
 
@@ -34,7 +34,7 @@ If we can't make the bus faster, can we load the model fewer times?
 
 Why is the output *identical* to running the big model alone? Because the Target Model verifies every draft token against what it would have produced itself, and **rejects any draft token the Target Model would not have generated**. The moment a draft token diverges, it is thrown away and the Target Model's own token is used instead. For **greedy decoding** (always pick the argmax), this guarantees bit-for-bit identical output. For **sampling**, the same guarantee holds only if you use the correct speculative-sampling acceptance rule (accept with probability `min(1, p_target/p_draft)`, otherwise resample from the corrected distribution) — a naive "accept if it matches" check does *not* preserve the sampling distribution. With this correctness in place, speculative decoding typically achieves 2x-3x speedups in real-world scenarios.
 
-*(Refer to `notebooks/19_speculative_decoding.ipynb` for the verification algorithm)*
+*(Refer to `notebooks/27_speculative_decoding.ipynb` for the verification algorithm)*
 
 ## PagedAttention and Continuous Batching
 
@@ -44,4 +44,4 @@ Inspired by Operating Systems managing CPU RAM, **PagedAttention** introduced "V
 
 This decoupling enables **Continuous Batching**, where the server dynamically injects new requests the moment an old request finishes, keeping GPU utilization high. The original vLLM paper reported up to ~24x higher throughput than vanilla HuggingFace Transformers in their best-case benchmarks (and a smaller margin versus already-optimized baselines like TGI). Treat that number as an illustrative best case — the speedup you see depends heavily on the workload, sequence lengths, and what you compare against.
 
-*(Refer to `notebooks/20_paged_attention.ipynb` to see the block tables in action)*
+*(Refer to `notebooks/28_paged_attention.ipynb` to see the block tables in action)*
