@@ -44,3 +44,46 @@ def test_attention_output_shape_and_cache():
     # Cache is stored as (batch, seq, heads, head_dim)
     assert k_cache.shape == (2, 7, 4, 8)
     assert v_cache.shape == (2, 7, 4, 8)
+
+
+def test_decoder_block_equals_manual_prenorm_composition():
+    """Guard the capstone's traceability claim (notebook 14, Section 3½).
+
+    The library's ``DecoderBlock`` must be *exactly* the pre-norm residual
+    composition of the pieces taught module by module — causal attention (3.1),
+    RMSNorm (4.1), and SwiGLU (4.1) — wired as::
+
+        h = x + attn(attn_norm(x))
+        out = h + ffn(ffn_norm(h))
+
+    If a future refactor changes that wiring (post-norm, a dropped residual, a
+    reordered sublayer), this test fails — so "the model you import is the model
+    you assembled by hand" can never silently become false.
+    """
+    from llm_workout.model import DecoderBlock
+
+    torch.manual_seed(0)
+    d_model, num_heads, hidden_dim, seq_len = 32, 4, 64, 9
+    block = DecoderBlock(d_model, num_heads, hidden_dim)
+
+    # Rebuild the block from the individual library layers, sharing its weights.
+    attn = MultiHeadCausalAttention(d_model, num_heads)
+    attn_norm = RMSNorm(d_model)
+    ffn = SwiGLU(d_model, hidden_dim)
+    ffn_norm = RMSNorm(d_model)
+    attn.load_state_dict(block.attn.state_dict())
+    attn_norm.load_state_dict(block.attn_norm.state_dict())
+    ffn.load_state_dict(block.ffn.state_dict())
+    ffn_norm.load_state_dict(block.ffn_norm.state_dict())
+
+    x = torch.randn(2, seq_len, d_model)
+    mask = torch.tril(torch.ones(seq_len, seq_len)).view(1, 1, seq_len, seq_len)
+    freqs_cis = precompute_freqs_cis(d_model // num_heads, seq_len)
+
+    lib_out, _ = block(x, mask=mask, freqs_cis=freqs_cis)
+
+    attn_out, _ = attn(attn_norm(x), mask=mask, freqs_cis=freqs_cis)
+    h = x + attn_out
+    manual_out = h + ffn(ffn_norm(h))
+
+    assert torch.allclose(lib_out, manual_out, atol=1e-6)

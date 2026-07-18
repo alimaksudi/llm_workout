@@ -50,9 +50,17 @@ for "the optimized path must match the simple path" checks.
 
 ## Conventions
 
-- **Notebook naming:** `NN_topic.ipynb`, zero-padded, in teaching order.
-- **Keep notebooks runnable top-to-bottom** with no hidden state. Clear outputs
-  before committing (`jupyter nbconvert --clear-output --inplace notebooks/*.ipynb`).
+- **Notebook naming & numbering:** `NN_topic.ipynb`, zero-padded, in teaching
+  order. The numbers follow [CURRICULUM.md](./CURRICULUM.md) — that file is the
+  source of truth, not the other way around. **Inserting a module is not a
+  one-file change:** renumber every downstream notebook to keep the sequence
+  gapless, add the row to the CURRICULUM.md module→file map, and grep for stale
+  cross-references (`Module X.Y`, `NBnn`, `notebooks/nn_`) across `notebooks/`,
+  `docs/`, and the READMEs before committing.
+- **Keep notebooks runnable top-to-bottom** with no hidden state. Execute a
+  notebook to verify it runs, then **clear outputs before committing**
+  (`jupyter nbconvert --clear-output --inplace notebooks/*.ipynb`) so diffs stay
+  small and free of non-deterministic churn.
 - **Style:** keep the existing clear, comment-driven style — explain the *why*, not
   just the *what*.
 
