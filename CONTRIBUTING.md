@@ -8,7 +8,7 @@ run** are all hugely welcome.
 
 | Path | Purpose |
 | --- | --- |
-| `notebooks/` | Self-contained teaching notebooks, one concept each (`NN_topic.ipynb`). |
+| `notebooks/` | Self-contained teaching notebooks, grouped into numbered topic folders (`NN_topic/`), one concept each (`NN_topic.ipynb`). |
 | `docs/` | The non-code "textbook" — analogies and theory behind the notebooks. |
 | `src/llm_workout/` | The reusable, production-style library distilled from the notebooks. |
 | `scripts/` | Runnable end-to-end demos (`train_tiny.py`, `generate.py`). |
@@ -59,7 +59,7 @@ for "the optimized path must match the simple path" checks.
   `docs/`, and the READMEs before committing.
 - **Keep notebooks runnable top-to-bottom** with no hidden state. Execute a
   notebook to verify it runs, then **clear outputs before committing**
-  (`jupyter nbconvert --clear-output --inplace notebooks/*.ipynb`) so diffs stay
+  (`jupyter nbconvert --clear-output --inplace notebooks/**/*.ipynb`) so diffs stay
   small and free of non-deterministic churn.
 - **Style:** keep the existing clear, comment-driven style — explain the *why*, not
   just the *what*.
