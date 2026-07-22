@@ -84,18 +84,19 @@ Legend: ✅ exists (notebook file numbers follow this order).
 | 4.1 | **The encoder layer** | 3.1 | residuals, normalization (RMSNorm), FFN, **SwiGLU built from scratch** | build & stack a stable transformer block with the modern gated FFN | ✅ (`NB10`) |
 | 4.2 | **The decoder layer** | 4.1 | masked self-attention, cross-attention (historical) | understand the 2017 decoder | ✅ (`NB11`) |
 | 4.3 | **The full transformer** | 4.2 | end-to-end assembly, decoder-only paradigm | assemble a complete model | ✅ (`NB12`) |
+| 4.4 | **Assemble your decoder-only GPT** | 4.3 | wire the real components into the working GPT, weight tying, prove it equals the library | **build the exact model you'll train** — no more importing a black box | ✅ (`NB13`) |
 
 ### Part 5 — Training Your Model
 *Goal: make the model you just built actually learn. This is the heart of the course.*
 
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 5.1 | **Next-token prediction & loss** | 4.3 | cross-entropy as "surprise", shifted targets | quantify how wrong a prediction is | ✅ (`NB13`) |
-| 5.2 | **The training loop** | 5.1, 1.3 | AdamW, backprop, zero_grad, **warmup + cosine LR schedules**, what big runs add (clipping, accumulation, mixed precision, parallelism) | write a full training loop and read a real one | ✅ (`NB14`) |
-| 5.3 | **Capstone — train your own GPT** | 5.2 | train on TinyShakespeare, watch loss fall, sample text; **prove the library block == your notebook code** | **train a real model from scratch end-to-end** | ✅ (`NB15`) |
-| 5.4 | **When training goes wrong** | 5.3 | the four classic failures (stuck loss, too-good loss, NaN explosion, shape crash), their fingerprints, the single-batch overfit test | *diagnose* a broken training run instead of staring at it | ✅ (`NB16`) |
-| 5.5 | **Decoding & sampling** | 5.3 | greedy vs sampling, **temperature, top-k, top-p**, repetition penalty | control generation quality/creativity | ✅ (`NB17`) |
-| 5.6 | **Evaluating a language model** | 5.3 | perplexity, held-out loss, qualitative checks, benchmark intuition | **measure** whether a model is good | ✅ (`NB18`) |
+| 5.1 | **Next-token prediction & loss** | 4.4 | cross-entropy as "surprise", shifted targets | quantify how wrong a prediction is | ✅ (`NB14`) |
+| 5.2 | **The training loop** | 5.1, 1.3 | AdamW, backprop, zero_grad, **warmup + cosine LR schedules**, what big runs add (clipping, accumulation, mixed precision, parallelism) | write a full training loop and read a real one | ✅ (`NB15`) |
+| 5.3 | **Capstone — train your own GPT** | 5.2 | train on TinyShakespeare, watch loss fall, sample text; **prove the library block == your notebook code** | **train a real model from scratch end-to-end** | ✅ (`NB16`) |
+| 5.4 | **When training goes wrong** | 5.3 | the four classic failures (stuck loss, too-good loss, NaN explosion, shape crash), their fingerprints, the single-batch overfit test | *diagnose* a broken training run instead of staring at it | ✅ (`NB17`) |
+| 5.5 | **Decoding & sampling** | 5.3 | greedy vs sampling, **temperature, top-k, top-p**, repetition penalty | control generation quality/creativity | ✅ (`NB18`) |
+| 5.6 | **Evaluating a language model** | 5.3 | perplexity, held-out loss, qualitative checks, benchmark intuition | **measure** whether a model is good | ✅ (`NB19`) |
 
 > **Why this order:** loss and the training loop come immediately after assembly
 > (you should never "generate" from an untrained model without knowing why it's
@@ -105,9 +106,9 @@ Legend: ✅ exists (notebook file numbers follow this order).
 ### Part 6 — Adapting Models: Fine-Tuning & Alignment
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 6.1 | **Supervised fine-tuning (SFT)** | 5.6 | base→chat, ChatML, loss masking *(conceptual module)* | turn a base model into an instruction-follower | ✅ (`NB19`) |
-| 6.2 | **Parameter-efficient fine-tuning (LoRA)** | 6.1 | low-rank updates, why ΔW is low-rank, adapters; **hands-on: LoRA-tune your own capstone checkpoint** | fine-tune cheaply — *the way it's really done* — on a model you trained | ✅ (`NB20`) |
-| 6.3 | **Preference alignment (DPO)** | 6.2 | preference pairs, reference model, the DPO loss *(conceptual module)* | align a model to human preferences | ✅ (`NB21`) |
+| 6.1 | **Supervised fine-tuning (SFT)** | 5.6 | base→chat, ChatML, loss masking *(conceptual module)* | turn a base model into an instruction-follower | ✅ (`NB20`) |
+| 6.2 | **Parameter-efficient fine-tuning (LoRA)** | 6.1 | low-rank updates, why ΔW is low-rank, adapters; **hands-on: LoRA-tune your own capstone checkpoint** | fine-tune cheaply — *the way it's really done* — on a model you trained | ✅ (`NB21`) |
+| 6.3 | **Preference alignment (DPO)** | 6.2 | preference pairs, reference model, the DPO loss *(conceptual module)* | align a model to human preferences | ✅ (`NB22`) |
 
 > **Why this order:** LoRA sits right after SFT, framed as the default method —
 > and it's the hands-on module of the trio: you adapt the actual Module 5.3
@@ -118,25 +119,25 @@ Legend: ✅ exists (notebook file numbers follow this order).
 
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 7.1 | **KV caching** | 5.5 | cache past keys/values, identical output, big speedup | make autoregressive generation fast | ✅ (`NB22`) |
-| 7.2 | **Advanced attention: MQA & GQA** | 7.1 | shrinking the KV cache, the heads/quality tradeoff | reason about memory vs quality | ✅ (`NB23`) |
-| 7.3 | **FlashAttention** | 7.1 | tiling, online softmax, HBM vs SRAM | explain hardware-aware attention | ✅ (`NB24`) |
+| 7.1 | **KV caching** | 5.5 | cache past keys/values, identical output, big speedup | make autoregressive generation fast | ✅ (`NB23`) |
+| 7.2 | **Advanced attention: MQA & GQA** | 7.1 | shrinking the KV cache, the heads/quality tradeoff | reason about memory vs quality | ✅ (`NB24`) |
+| 7.3 | **FlashAttention** | 7.1 | tiling, online softmax, HBM vs SRAM | explain hardware-aware attention | ✅ (`NB25`) |
 
 ### Part 8 — Scaling the Architecture
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 8.1 | **Mixture of Experts (MoE)** | 7.x | sparse routing, top-k experts, load balancing | explain sparse scaling (Mixtral-style) | ✅ (`NB25`) |
-| 8.2 | **Scaling laws** | 8.1 | params × data × compute, Chinchilla-optimal budgets | reason about *why* bigger+more-data helps and how to spend compute | ✅ (`NB26`) |
+| 8.1 | **Mixture of Experts (MoE)** | 7.x | sparse routing, top-k experts, load balancing | explain sparse scaling (Mixtral-style) | ✅ (`NB26`) |
+| 8.2 | **Scaling laws** | 8.1 | params × data × compute, Chinchilla-optimal budgets | reason about *why* bigger+more-data helps and how to spend compute | ✅ (`NB27`) |
 
 ### Part 9 — Production & Serving
 *Goal: the systems that make serving an LLM viable — plus the graduation lap.*
 
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 9.1 | **Quantization** | 7.x | absmax, zero-point, INT8, memory savings | shrink a model for deployment | ✅ (`NB27`) |
-| 9.2 | **Speculative decoding** | 7.1 | draft+verify, accept/reject, the speedup | explain fast multi-token generation | ✅ (`NB28`) |
-| 9.3 | **PagedAttention & continuous batching** | 7.1 | block tables, memory paging, batching | explain vLLM-style serving + capstone synthesis | ✅ (`NB29`) |
-| 9.4 | **Graduation: reading a real LLM** | 9.3 | our library ↔ Llama-3 ↔ GPT-2 name map, counting Llama-3-8B's parameters by hand, what production code adds | open nanoGPT / Llama source and **recognize every line** | ✅ (`NB30`) |
+| 9.1 | **Quantization** | 7.x | absmax, zero-point, INT8, memory savings | shrink a model for deployment | ✅ (`NB28`) |
+| 9.2 | **Speculative decoding** | 7.1 | draft+verify, accept/reject, the speedup | explain fast multi-token generation | ✅ (`NB29`) |
+| 9.3 | **PagedAttention & continuous batching** | 7.1 | block tables, memory paging, batching | explain vLLM-style serving + capstone synthesis | ✅ (`NB30`) |
+| 9.4 | **Graduation: reading a real LLM** | 9.3 | our library ↔ Llama-3 ↔ GPT-2 name map, counting Llama-3-8B's parameters by hand, what production code adds | open nanoGPT / Llama source and **recognize every line** | ✅ (`NB31`) |
 
 > **Why 9.4 exists:** the point of building from scratch was never the tiny model —
 > it was *transferable understanding*. This module cashes that in: you compute
@@ -164,24 +165,25 @@ The notebook files are numbered to follow this curriculum order.
 | 4.1 | Encoder layer | `notebooks/04_transformer/10_the_encoder_layer.ipynb` |
 | 4.2 | Decoder layer | `notebooks/04_transformer/11_the_decoder_layer.ipynb` |
 | 4.3 | Full transformer | `notebooks/04_transformer/12_full_transformer.ipynb` |
-| 5.1 | Loss | `notebooks/05_training/13_cross_entropy_loss.ipynb` |
-| 5.2 | Training loop | `notebooks/05_training/14_the_training_loop.ipynb` |
-| 5.3 | Capstone: train your GPT | `notebooks/05_training/15_train_your_own_gpt.ipynb` |
-| 5.4 | When training goes wrong | `notebooks/05_training/16_when_training_goes_wrong.ipynb` |
-| 5.5 | Decoding & sampling | `notebooks/05_training/17_decoding_and_sampling.ipynb` |
-| 5.6 | Evaluation | `notebooks/05_training/18_evaluating_a_language_model.ipynb` |
-| 6.1 | SFT | `notebooks/06_finetuning/19_supervised_fine_tuning.ipynb` |
-| 6.2 | LoRA | `notebooks/06_finetuning/20_peft_and_lora.ipynb` |
-| 6.3 | DPO | `notebooks/06_finetuning/21_dpo_preference_alignment.ipynb` |
-| 7.1 | KV caching | `notebooks/07_inference/22_kv_caching.ipynb` |
-| 7.2 | MQA/GQA | `notebooks/07_inference/23_advanced_attention.ipynb` |
-| 7.3 | FlashAttention | `notebooks/07_inference/24_flash_attention.ipynb` |
-| 8.1 | MoE | `notebooks/08_scaling/25_mixture_of_experts.ipynb` |
-| 8.2 | Scaling laws | `notebooks/08_scaling/26_scaling_laws.ipynb` |
-| 9.1 | Quantization | `notebooks/09_production/27_quantization_fundamentals.ipynb` |
-| 9.2 | Speculative decoding | `notebooks/09_production/28_speculative_decoding.ipynb` |
-| 9.3 | PagedAttention | `notebooks/09_production/29_paged_attention.ipynb` |
-| 9.4 | Graduation: reading a real LLM | `notebooks/09_production/30_reading_a_real_llm.ipynb` |
+| 4.4 | Assemble your decoder-only GPT | `notebooks/04_transformer/13_assemble_gpt.ipynb` |
+| 5.1 | Loss | `notebooks/05_training/14_cross_entropy_loss.ipynb` |
+| 5.2 | Training loop | `notebooks/05_training/15_the_training_loop.ipynb` |
+| 5.3 | Capstone: train your GPT | `notebooks/05_training/16_train_your_own_gpt.ipynb` |
+| 5.4 | When training goes wrong | `notebooks/05_training/17_when_training_goes_wrong.ipynb` |
+| 5.5 | Decoding & sampling | `notebooks/05_training/18_decoding_and_sampling.ipynb` |
+| 5.6 | Evaluation | `notebooks/05_training/19_evaluating_a_language_model.ipynb` |
+| 6.1 | SFT | `notebooks/06_finetuning/20_supervised_fine_tuning.ipynb` |
+| 6.2 | LoRA | `notebooks/06_finetuning/21_peft_and_lora.ipynb` |
+| 6.3 | DPO | `notebooks/06_finetuning/22_dpo_preference_alignment.ipynb` |
+| 7.1 | KV caching | `notebooks/07_inference/23_kv_caching.ipynb` |
+| 7.2 | MQA/GQA | `notebooks/07_inference/24_advanced_attention.ipynb` |
+| 7.3 | FlashAttention | `notebooks/07_inference/25_flash_attention.ipynb` |
+| 8.1 | MoE | `notebooks/08_scaling/26_mixture_of_experts.ipynb` |
+| 8.2 | Scaling laws | `notebooks/08_scaling/27_scaling_laws.ipynb` |
+| 9.1 | Quantization | `notebooks/09_production/28_quantization_fundamentals.ipynb` |
+| 9.2 | Speculative decoding | `notebooks/09_production/29_speculative_decoding.ipynb` |
+| 9.3 | PagedAttention | `notebooks/09_production/30_paged_attention.ipynb` |
+| 9.4 | Graduation: reading a real LLM | `notebooks/09_production/31_reading_a_real_llm.ipynb` |
 
 ## Appendix B — The applied track (Part II)
 

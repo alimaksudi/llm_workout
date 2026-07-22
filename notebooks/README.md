@@ -35,43 +35,44 @@ prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 - **10. The encoder layer** — residuals, RMSNorm, the FFN, SwiGLU from scratch.
 - **11. The decoder layer** — masked self-attention, (historical) cross-attention.
 - **12. The full transformer** — end-to-end assembly (decoder-only).
+- **13. Assemble your decoder-only GPT** — wire the real parts into the working GPT, weight tying, and prove it equals the library.
 
 ### `05_training/`
-- **13. Next-token prediction & cross-entropy loss** — how wrongness is measured.
-- **14. The training loop** — AdamW, warmup + cosine schedules, what big runs add.
-- **15. Train your own GPT (capstone)** — train the model you built, end to end.
-- **16. When training goes wrong** — a debugging clinic: four classic failures and their one-line checks.
-- **17. Decoding & sampling** — greedy, temperature, top-k, top-p, repetition penalty.
-- **18. Evaluating a language model** — perplexity, held-out loss, benchmarks.
+- **14. Next-token prediction & cross-entropy loss** — how wrongness is measured.
+- **15. The training loop** — AdamW, warmup + cosine schedules, what big runs add.
+- **16. Train your own GPT (capstone)** — train the model you built, end to end.
+- **17. When training goes wrong** — a debugging clinic: four classic failures and their one-line checks.
+- **18. Decoding & sampling** — greedy, temperature, top-k, top-p, repetition penalty.
+- **19. Evaluating a language model** — perplexity, held-out loss, benchmarks.
 
 ### `06_finetuning/`
-- **19. Supervised fine-tuning (SFT)** — base → chat, loss masking (conceptual).
-- **20. Parameter-efficient fine-tuning (LoRA)** — hands-on, on your own capstone checkpoint.
-- **21. Preference alignment (DPO)** — the DPO loss (conceptual).
+- **20. Supervised fine-tuning (SFT)** — base → chat, loss masking (conceptual).
+- **21. Parameter-efficient fine-tuning (LoRA)** — hands-on, on your own capstone checkpoint.
+- **22. Preference alignment (DPO)** — the DPO loss (conceptual).
 
 ### `07_inference/`
-- **22. KV caching** — fast autoregressive generation.
-- **23. Advanced attention** — MQA & GQA.
-- **24. FlashAttention** — tiling and hardware-aware attention.
+- **23. KV caching** — fast autoregressive generation.
+- **24. Advanced attention** — MQA & GQA.
+- **25. FlashAttention** — tiling and hardware-aware attention.
 
 ### `08_scaling/`
-- **25. Mixture of Experts (MoE)** — sparse routing.
-- **26. Scaling laws** — params × data × compute, Chinchilla-optimal budgets.
+- **26. Mixture of Experts (MoE)** — sparse routing.
+- **27. Scaling laws** — params × data × compute, Chinchilla-optimal budgets.
 
 ### `09_production/`
-- **27. Quantization fundamentals** — absmax, zero-point, INT8.
-- **28. Speculative decoding** — draft + verify.
-- **29. PagedAttention & continuous batching** — vLLM-style serving.
-- **30. Graduation — reading a real LLM** — map your library onto Llama-3 / GPT-2; count Llama-3-8B's parameters by hand.
+- **28. Quantization fundamentals** — absmax, zero-point, INT8.
+- **29. Speculative decoding** — draft + verify.
+- **30. PagedAttention & continuous batching** — vLLM-style serving.
+- **31. Graduation — reading a real LLM** — map your library onto Llama-3 / GPT-2; count Llama-3-8B's parameters by hand.
 
 ## Part II — Applied LLM engineering
 *Needs `pip install -e ".[applied]"`; these load small pretrained models.*
 
 ### `10_applied/`
-- **31. Calling a model** — chat interface, roles, tokens, streaming.
-- **32. Structured output** — JSON, schema validation, retries, Pydantic.
-- **33. Prompt engineering** — zero/few-shot, chain-of-thought, self-consistency, injection defense.
-- **34. Embeddings & semantic search** — cosine similarity, a brute-force vector index, k-means, PCA.
-- **35. RAG — retrieval** — chunking, dense search, BM25 from scratch, hybrid RRF.
-- **36. RAG — generation (capstone)** — reranking, context construction, citations, end-to-end.
-- **37. Evaluating LLM systems** — exact match, token F1, faithfulness, LLM-as-judge, hallucination detection.
+- **32. Calling a model** — chat interface, roles, tokens, streaming.
+- **33. Structured output** — JSON, schema validation, retries, Pydantic.
+- **34. Prompt engineering** — zero/few-shot, chain-of-thought, self-consistency, injection defense.
+- **35. Embeddings & semantic search** — cosine similarity, a brute-force vector index, k-means, PCA.
+- **36. RAG — retrieval** — chunking, dense search, BM25 from scratch, hybrid RRF.
+- **37. RAG — generation (capstone)** — reranking, context construction, citations, end-to-end.
+- **38. Evaluating LLM systems** — exact match, token F1, faithfulness, LLM-as-judge, hallucination detection.

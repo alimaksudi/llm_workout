@@ -51,34 +51,35 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [x] **10. The Encoder Layer**: Residual connections, RMSNorm, the FFN — and SwiGLU built from scratch.
 - [x] **11. The Decoder Layer**: Masked attention and (historical) cross-attention.
 - [x] **12. The Full Transformer**: Putting it all together (decoder-only).
+- [x] **13. Assemble Your Decoder-Only GPT**: Wire the real components into the working GPT, learn weight tying, and prove it equals the library `GPT`.
 
 ### Part 5: Training Your Model
-- [x] **13. Next-Token Prediction & Cross-Entropy Loss**: How wrongness is measured.
-- [x] **14. The Training Loop**: AdamW, backprop, LR schedules (warmup + cosine), and what big runs add.
-- [x] **15. Train Your Own GPT (Capstone)**: Train the model you built, end to end — with a proof that the library block equals your notebook code.
-- [x] **16. When Training Goes Wrong**: A debugging clinic — four classic failures, their fingerprints, and the one-line checks that diagnose them.
-- [x] **17. Decoding & Sampling**: Greedy, temperature, top-k, top-p, repetition penalty.
-- [x] **18. Evaluating a Language Model**: Perplexity, held-out loss, benchmarks.
+- [x] **14. Next-Token Prediction & Cross-Entropy Loss**: How wrongness is measured.
+- [x] **15. The Training Loop**: AdamW, backprop, LR schedules (warmup + cosine), and what big runs add.
+- [x] **16. Train Your Own GPT (Capstone)**: Train the model you built, end to end — with a proof that the library block equals your notebook code.
+- [x] **17. When Training Goes Wrong**: A debugging clinic — four classic failures, their fingerprints, and the one-line checks that diagnose them.
+- [x] **18. Decoding & Sampling**: Greedy, temperature, top-k, top-p, repetition penalty.
+- [x] **19. Evaluating a Language Model**: Perplexity, held-out loss, benchmarks.
 
 ### Part 6: Fine-Tuning & Alignment
-- [x] **19. Supervised Fine-Tuning (SFT)**: Turning a base model into a chatbot (conceptual).
-- [x] **20. Parameter-Efficient Fine-Tuning (LoRA)**: Cheap fine-tuning with low-rank adapters — hands-on, on your own capstone checkpoint.
-- [x] **21. Preference Alignment (DPO)**: Aligning to human preferences (conceptual).
+- [x] **20. Supervised Fine-Tuning (SFT)**: Turning a base model into a chatbot (conceptual).
+- [x] **21. Parameter-Efficient Fine-Tuning (LoRA)**: Cheap fine-tuning with low-rank adapters — hands-on, on your own capstone checkpoint.
+- [x] **22. Preference Alignment (DPO)**: Aligning to human preferences (conceptual).
 
 ### Part 7: Inference Optimization
-- [x] **22. KV Caching**: Optimizing autoregressive generation speed.
-- [x] **23. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
-- [x] **24. FlashAttention**: Memory tiling and hardware-aware attention.
+- [x] **23. KV Caching**: Optimizing autoregressive generation speed.
+- [x] **24. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
+- [x] **25. FlashAttention**: Memory tiling and hardware-aware attention.
 
 ### Part 8: Scaling the Architecture
-- [x] **25. Mixture of Experts (MoE)**: Sparse routing for scaling.
-- [x] **26. Scaling Laws**: Why params × data × compute work, and Chinchilla-optimal budgets.
+- [x] **26. Mixture of Experts (MoE)**: Sparse routing for scaling.
+- [x] **27. Scaling Laws**: Why params × data × compute work, and Chinchilla-optimal budgets.
 
 ### Part 9: Production & Serving
-- [x] **27. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
-- [x] **28. Speculative Decoding**: Fast inference with draft vs. target models.
-- [x] **29. PagedAttention & Continuous Batching**: vLLM-style serving.
-- [x] **30. Graduation — Reading a Real LLM**: Map your library onto Llama-3 and GPT-2, count Llama-3-8B's parameters by hand, and walk a reading list of real model source.
+- [x] **28. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
+- [x] **29. Speculative Decoding**: Fast inference with draft vs. target models.
+- [x] **30. PagedAttention & Continuous Batching**: vLLM-style serving.
+- [x] **31. Graduation — Reading a Real LLM**: Map your library onto Llama-3 and GPT-2, count Llama-3-8B's parameters by hand, and walk a reading list of real model source.
 
 ---
 
@@ -88,21 +89,21 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 > Requires `pip install -e ".[applied]"`. See [CURRICULUM_PART_II.md](./CURRICULUM_PART_II.md) for the full blueprint.
 
 ### Part A: Using LLMs in Practice
-- [x] **31. Calling a Model**: Chat interface, roles, tokens, temperature, streaming.
-- [x] **32. Structured Output**: JSON prompting, parsing, schema validation, retries, Pydantic.
+- [x] **32. Calling a Model**: Chat interface, roles, tokens, temperature, streaming.
+- [x] **33. Structured Output**: JSON prompting, parsing, schema validation, retries, Pydantic.
 
 ### Part B: Prompt Engineering
-- [x] **33. Prompt Engineering**: Zero/few-shot, chain-of-thought, self-consistency, reliability, injection defense.
+- [x] **34. Prompt Engineering**: Zero/few-shot, chain-of-thought, self-consistency, reliability, injection defense.
 
 ### Part C: Embeddings & Semantic Search
-- [x] **34. Embeddings & Semantic Search**: Sentence embeddings, cosine similarity, brute-force vector index, k-means, PCA visualization.
+- [x] **35. Embeddings & Semantic Search**: Sentence embeddings, cosine similarity, brute-force vector index, k-means, PCA visualization.
 
 ### Part D: Retrieval-Augmented Generation (RAG)
-- [x] **35. RAG — Retrieval**: Why RAG, chunking strategies, dense search, BM25 from scratch, hybrid RRF retrieval.
-- [x] **36. RAG — Generation (Capstone)**: Cross-encoder reranking, context construction, lost-in-the-middle, citations, end-to-end RAG system.
+- [x] **36. RAG — Retrieval**: Why RAG, chunking strategies, dense search, BM25 from scratch, hybrid RRF retrieval.
+- [x] **37. RAG — Generation (Capstone)**: Cross-encoder reranking, context construction, lost-in-the-middle, citations, end-to-end RAG system.
 
 ### Part E: Evaluating LLM Systems
-- [x] **37. Evaluating LLM Systems**: Exact match, token F1, semantic similarity, faithfulness, LLM-as-judge, hallucination detection, regression testing.
+- [x] **38. Evaluating LLM Systems**: Exact match, token F1, semantic similarity, faithfulness, LLM-as-judge, hallucination detection, regression testing.
 
 ---
 
