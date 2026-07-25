@@ -76,3 +76,26 @@ def test_generate_runs_and_respects_length():
     tokens = list(model.generate(context, max_new_tokens=5))
     assert len(tokens) == 5
     assert all(0 <= t < 37 for t in tokens)
+
+
+def test_exceeding_max_seq_len_raises_clear_error():
+    """A sequence longer than max_seq_len must fail with a helpful message,
+    not an opaque RoPE broadcast assertion."""
+    import pytest
+
+    model = _tiny_model()  # max_seq_len=32
+    too_long = torch.zeros((1, 33), dtype=torch.long)
+    with pytest.raises(ValueError, match="max_seq_len"):
+        model(too_long)
+
+
+def test_generation_beyond_max_seq_len_raises():
+    """Prompt + generated tokens must fit within max_seq_len; overrunning during
+    cached generation raises the same clear error."""
+    import pytest
+
+    model = _tiny_model()  # max_seq_len=32
+    context = torch.zeros((1, 30), dtype=torch.long)
+    with pytest.raises(ValueError, match="max_seq_len"):
+        # 30-token prompt + 5 new tokens reaches position 35 > 32
+        list(model.generate(context, max_new_tokens=5))

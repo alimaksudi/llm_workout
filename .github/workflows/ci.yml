@@ -40,6 +40,7 @@ jobs:
     # CURRICULUM_PART_II.md for that separate-lane decision.
     name: Part I notebooks execute
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v4
@@ -74,12 +75,16 @@ jobs:
             start=$SECONDS
             # Run from the notebook's own folder so its relative paths ("../tinyshakespeare.txt",
             # "../checkpoints/...") resolve exactly as they do for a student.
+            echo "::group::${nb}"
             if (cd "$(dirname "$nb")" && \
                 python -m jupyter nbconvert --to notebook --execute --stdout \
                   --ExecutePreprocessor.timeout=1200 "$(basename "$nb")" > /dev/null); then
               echo "PASS  ${nb}  ($((SECONDS-start))s)"
+              echo "::endgroup::"
             else
-              echo "FAIL  ${nb}"
+              echo "::endgroup::"
+              # Annotate the failing file so it shows up inline in the GitHub UI.
+              echo "::error file=${nb}::Notebook failed to execute"
               failed+=("$nb")
             fi
           done
