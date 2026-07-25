@@ -19,6 +19,12 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [Chapter 5: Advanced Hardware & Mixture of Experts (MoE)](./docs/05_advanced_hardware_and_moe.md)
 - [Chapter 6: Production and Inference Engineering](./docs/06_production_and_inference.md)
 
+## 📖 Glossary
+
+Every technical term used anywhere in this course, defined in plain English:
+**[GLOSSARY.md](./GLOSSARY.md)**. (Math *symbols* — Σ, ∇, log, sin, Greek letters — are
+taught from zero in notebook 03, the math primer.)
+
 ## 🗺️ Roadmap & Progress Tracker
 
 > The full learning path — with prerequisites and learning outcomes for every

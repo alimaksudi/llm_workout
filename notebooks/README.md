@@ -8,6 +8,10 @@ intended path. Read the matching `docs/` chapter first when there is one; every
 notebook ends with a "🏋️ Try it yourself" exercise. Full learning outcomes and
 prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 
+> 📖 **Stuck on a word?** Every technical term is defined in plain English in
+> [`../GLOSSARY.md`](../GLOSSARY.md) — and every math *symbol* is taught from zero in
+> notebook 03. You should never need to leave this repo to understand a lesson.
+
 > Setup once, from the repo root: `pip install -e ".[notebooks]"` (add `".[applied]"`
 > for Part II, notebooks 31+). Notebooks are committed with outputs cleared — run
 > them to see the plots and results.

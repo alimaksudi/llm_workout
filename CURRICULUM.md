@@ -35,6 +35,10 @@ Each module has a theory chapter (`docs/`) and a hands-on notebook
 (`notebooks/`). **Read the chapter, then do the notebook.** Every notebook ends
 with a "🏋️ Try it yourself" exercise — do it before moving on.
 
+Two safety nets so you never need outside material: **[GLOSSARY.md](./GLOSSARY.md)**
+defines every technical term in plain English, and **Module 1.1** teaches every math
+symbol the course uses from zero.
+
 ---
 
 ## The learning path
