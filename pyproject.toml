@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llm_workout"
+version = "0.1.0"
+description = "A from-scratch educational LLM library and training set."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "LLM Workout" }]
+
+# Core runtime dependencies for the `llm_workout` library and training script.
+dependencies = [
+    "torch",
+    "numpy",
+]
+
+[project.optional-dependencies]
+# Everything needed to run the educational notebooks end-to-end.
+notebooks = [
+    "torchvision",
+    "einops",
+    "matplotlib",
+    "seaborn",
+    "jupyterlab",
+    "ipywidgets",
+    "tiktoken",
+]
+# Tooling for development and the test suite.
+dev = [
+    "pytest",
+]
+# Part II (Applied LLM Engineering): pretrained models for embeddings/generation.
+# These notebooks use small *pretrained* models (the Part I from-scratch model
+# can't follow instructions or embed arbitrary text). The hosted-API path is
+# optional — labs run locally by default.
+applied = [
+    "sentence-transformers",  # embeddings for semantic search / RAG (local)
+    "transformers",           # small local instruct model for generation
+    "openai",                 # optional: hosted-API path for generation labs
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -118,3 +118,25 @@ for iter in range(max_iters):
     optimizer.step()
 
 print("Training finished.")
+
+# --- Save a checkpoint (weights + tokenizer + config) ---
+checkpoint_path = "checkpoints/tiny_shakespeare.pt"
+os.makedirs("checkpoints", exist_ok=True)
+torch.save(
+    {
+        "model_state": model.state_dict(),
+        "config": {
+            "vocab_size": vocab_size,
+            "d_model": n_embd,
+            "num_layers": n_layer,
+            "num_heads": n_head,
+            "hidden_dim": hidden_dim,
+            "max_seq_len": block_size,
+        },
+        "stoi": stoi,
+        "itos": itos,
+    },
+    checkpoint_path,
+)
+print(f"Checkpoint saved to {checkpoint_path}")
+print("Generate text with: python scripts/generate.py")

@@ -109,33 +109,34 @@ class GPT(nn.Module):
     @torch.no_grad()
     def generate(self, idx: torch.Tensor, max_new_tokens: int):
         """
-        Extremely fast generation utilizing the KV Cache.
+        Autoregressively generate tokens, yielding one token id at a time.
+
+        Uses the KV cache: the prompt is processed once (the prefill), then only
+        the single most recently generated token is fed back on each step.
         """
+        was_training = self.training
         self.eval()
-        B, T = idx.size()
-        
+
         kv_caches = None
         start_pos = 0
-        
-        for _ in range(max_new_tokens):
-            # Pre-fill phase or normal token forward
-            logits, _, kv_caches = self(idx, start_pos=start_pos, kv_caches=kv_caches)
-            
-            # Predict
-            logits = logits[:, -1, :] # The very last token predicts the next
-            probs = torch.nn.functional.softmax(logits, dim=-1)
-            idx_next = torch.multinomial(probs, num_samples=1)
-            
-            # Update start_pos so the mathematical ROPE sequence advances
-            start_pos += idx.size(1)
-            
-            # The ONLY thing we feed back into the network is the single generated token!
-            idx = idx_next 
-            
-            # To return the full string, we should yield or append. 
-            # For simplicity in this demo, since `idx` is just 1 token now, we'll store it.
-            # But the caller usually wants the whole string. Let's just yield tokens one by one
-            # and let the inference wrapper join them. Or we can just build a list.
-            yield idx_next.item()
-            
-        self.train()
+
+        try:
+            for _ in range(max_new_tokens):
+                # Prefill on the first pass (full prompt), then one token per step.
+                logits, _, kv_caches = self(idx, start_pos=start_pos, kv_caches=kv_caches)
+
+                # Sample the next token from the final position's distribution.
+                logits = logits[:, -1, :]
+                probs = torch.nn.functional.softmax(logits, dim=-1)
+                idx_next = torch.multinomial(probs, num_samples=1)
+
+                # Advance the RoPE position by the number of tokens we just processed.
+                start_pos += idx.size(1)
+
+                # Feed only the newly generated token back into the network.
+                idx = idx_next
+
+                yield idx_next.item()
+        finally:
+            # Restore the caller's original train/eval mode.
+            self.train(was_training)
