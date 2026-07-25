@@ -37,7 +37,7 @@ taught from zero in notebook 03, the math primer.)
 > numeric order across folders is the intended sequence.
 
 ### Part 0: Foundations & Setup
-- [x] **01. Setup & a PyTorch Crash Course**: Tensors, broadcasting, matmul, autograd.
+- [x] **01. Setup & a PyTorch Crash Course**: Tensors, broadcasting, matmul, batched matmul, autograd, and the PyTorch idioms you'll see everywhere (`unsqueeze`, `no_grad`, `detach`, train/eval mode, buffers).
 - [x] **02. Neural Networks in 30 Minutes**: Neurons, parameters, gradient descent, training a tiny net.
 
 ### Part 1: Mathematical Building Blocks

@@ -51,7 +51,7 @@ Legend: ✅ exists (notebook file numbers follow this order).
 | # | Module | Prerequisites | You will learn | After this you can | Status |
 |---|--------|---------------|----------------|--------------------|--------|
 | 0.0 | **Prologue: the world before Transformers** | none | why RNNs failed, what attention unlocked | explain *why* LLMs are built the way they are | ✅ (`docs/00`) |
-| 0.1 | **Setup & PyTorch crash course** | basic Python | venv, install, tensors, autograd basics, running notebooks | run every notebook in this repo; manipulate tensors | ✅ (`NB01`) |
+| 0.1 | **Setup & PyTorch crash course** | basic Python | venv, install, tensors, batched matmul, autograd basics, the everyday PyTorch idioms (`unsqueeze`, `no_grad`, `detach`, train/eval mode, buffers) | run every notebook in this repo; manipulate tensors | ✅ (`NB01`) |
 | 0.2 | **Neural networks in 30 minutes** | 0.1 | neuron, parameter, forward pass, loss, gradient descent, train/val split | hold the mental model the later modules assume | ✅ (`NB02`) |
 
 ### Part 1 — Mathematical Building Blocks

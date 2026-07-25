@@ -19,7 +19,7 @@ prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 ## Part I — Build an LLM from scratch
 
 ### `00_prerequisites/` — get set up, see the whole picture
-- **01. Setup & a PyTorch crash course** — tensors, broadcasting, matmul, batched matmul, autograd.
+- **01. Setup & a PyTorch crash course** — tensors, broadcasting, matmul, batched matmul, autograd, and the everyday PyTorch idioms (`unsqueeze`, `no_grad`, `detach`, train/eval mode, buffers).
 - **02. Neural networks in 30 minutes** — neuron, parameter, loss, gradient descent; train a tiny net.
 
 ### `01_ml_foundations/` — the math and mechanics, built from zero
