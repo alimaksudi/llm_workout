@@ -9,8 +9,8 @@ A hands-on journey to mastering Transformer architectures, LLMs, and the mathema
 
 > **Notebooks teach, the library ships.** The notebooks are deliberately standalone (each re-implements its concept inline so you can run any one in isolation). The `src/llm_workout/` package is the polished, **tested** distillation of those ideas. See [CONTRIBUTING.md](./CONTRIBUTING.md) for how the pieces fit together.
 
-## 📚 Architectural Textbook (Zero to Hero)
-For a deep dive into the mathematical concepts, analogies, and strictly non-code architectural theory driving these Jupyter notebooks, refer to our compiled documentation:
+## 📚 Architectural Textbook (companion reading)
+A prose-only companion to the notebooks: the concepts, analogies, and architectural theory with no code in the way. These chapters are grouped by theme rather than one-per-notebook, so treat them as optional deep reading — **the notebooks are self-contained on their own.**
 - [Chapter 0: Prologue - History and Limitations](./docs/00_prologue.md)
 - [Chapter 1: Mathematics and Structural Building Blocks](./docs/01_math_and_building_blocks.md)
 - [Chapter 2: Architecture Assembly](./docs/02_architecture_assembly.md)

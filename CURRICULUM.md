@@ -31,9 +31,14 @@ math/ML on-ramp so no prior deep-learning experience is required.
 
 ## How to use it
 
-Each module has a theory chapter (`docs/`) and a hands-on notebook
-(`notebooks/`). **Read the chapter, then do the notebook.** Every notebook ends
-with a "🏋️ Try it yourself" exercise — do it before moving on.
+**The notebooks are the course** — each one is self-contained, and every notebook
+ends with a "🏋️ Try it yourself" exercise, so work through them in order and do the
+exercise before moving on.
+
+The `docs/` folder is a **companion theory textbook**: prose-only chapters, grouped
+by theme rather than one-per-module, for readers who like the concepts laid out away
+from the code. Where a chapter covers what you're about to build, reading it first
+helps — but you never *need* it, and not every module has one.
 
 Two safety nets so you never need outside material: **[GLOSSARY.md](./GLOSSARY.md)**
 defines every technical term in plain English, and **Module 1.1** teaches every math

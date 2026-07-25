@@ -7,6 +7,7 @@ on:
 
 jobs:
   test:
+    name: Library tests
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -30,3 +31,80 @@ jobs:
 
       - name: Run tests
         run: pytest -q
+
+  notebooks:
+    # The notebooks ARE the course, so a green test suite alone is not enough:
+    # this job executes every Part I notebook top-to-bottom and fails if any of
+    # them raises. Part II (notebooks/10_applied) is deliberately excluded — those
+    # download pretrained models and are slow/flaky by nature; see
+    # CURRICULUM_PART_II.md for that separate-lane decision.
+    name: Part I notebooks execute
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package and the notebook stack
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[notebooks]"
+          pip install nbconvert nbclient ipykernel
+
+      - name: Execute every Part I notebook
+        env:
+          MPLBACKEND: Agg          # headless: never try to open a plot window
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          set -uo pipefail
+          failed=()
+          books=()
+          # Numeric order across topic folders, skipping the applied track.
+          while IFS= read -r line; do books+=("$line"); done < <(
+            find notebooks -name '*.ipynb' -not -path 'notebooks/10_applied/*' | sort -t/ -k3
+          )
+          echo "Executing ${#books[@]} notebooks..."
+          for nb in "${books[@]}"; do
+            start=$SECONDS
+            # Run from the notebook's own folder so its relative paths ("../tinyshakespeare.txt",
+            # "../checkpoints/...") resolve exactly as they do for a student.
+            if (cd "$(dirname "$nb")" && \
+                python -m jupyter nbconvert --to notebook --execute --stdout \
+                  --ExecutePreprocessor.timeout=1200 "$(basename "$nb")" > /dev/null); then
+              echo "PASS  ${nb}  ($((SECONDS-start))s)"
+            else
+              echo "FAIL  ${nb}"
+              failed+=("$nb")
+            fi
+          done
+          echo "---------------------------------------------"
+          if [ ${#failed[@]} -gt 0 ]; then
+            echo "${#failed[@]} notebook(s) failed:"
+            printf '  %s\n' "${failed[@]}"
+            exit 1
+          fi
+          echo "All ${#books[@]} Part I notebooks executed cleanly."
+
+      - name: Check notebooks were committed with outputs cleared
+        run: |
+          python - <<'PY'
+          import json, glob, sys
+          dirty = []
+          for f in sorted(glob.glob('notebooks/**/*.ipynb', recursive=True)):
+              nb = json.load(open(f))
+              if any(c.get('outputs') for c in nb['cells'] if c['cell_type'] == 'code'):
+                  dirty.append(f)
+          if dirty:
+              print("These notebooks have stored outputs; clear them before committing")
+              print("  (jupyter nbconvert --clear-output --inplace notebooks/**/*.ipynb):")
+              for f in dirty:
+                  print("   ", f)
+              sys.exit(1)
+          print("All notebooks are committed with outputs cleared.")
+          PY
