@@ -19,7 +19,7 @@ prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 - **02. Neural networks in 30 minutes** — neuron, parameter, loss, gradient descent; train a tiny net.
 
 ### `01_ml_foundations/` — the math and mechanics, built from zero
-- **03. The math you'll actually need** — reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation.
+- **03. The math you'll actually need** — reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation, **Greek letters & remaining notation (∇, ᵀ, ln)**, **sine/cosine waves**.
 - **04. Tensors & linear algebra** — dot product = similarity, the row×column matmul mechanic, softmax step by step.
 - **05. Probability & calculus** — logits, cross-entropy, gradients, the chain rule.
 - **06. Backpropagation from scratch** — every gradient by hand in NumPy, checked against finite differences and autograd; SGD & Adam from scratch.

@@ -53,7 +53,7 @@ Legend: ✅ exists (notebook file numbers follow this order).
 ### Part 1 — Mathematical Building Blocks
 | # | Module | Prereq | You will learn | After this you can | Status |
 |---|--------|--------|----------------|--------------------|--------|
-| 1.1 | **The math you'll actually need** | 0.2 | reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation | *read* any formula in the course; understand every symbol before it's used | ✅ (`NB03`) |
+| 1.1 | **The math you'll actually need** | 0.2 | reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation, **Greek letters & remaining notation (∇, ᵀ, ln)**, **sine/cosine waves** | *read* any formula in the course; understand every symbol before it's used | ✅ (`NB03`) |
 | 1.2 | **Tensors & linear algebra** | 1.1 | tensors, matmul (the row×column mechanic), dot product = alignment, softmax step by step | track shapes; reason about matrix ops | ✅ (`NB04`) |
 | 1.3 | **Probability & calculus** | 1.2 | softmax, cross-entropy preview, gradients/chain rule | understand how learning signal flows | ✅ (`NB05`) |
 | 1.4 | **Backpropagation from scratch** | 1.3 | finite differences, the chain rule by hand (raw NumPy), SGD & Adam from scratch, verifying against autograd | derive & *verify* every gradient yourself; treat `loss.backward()` as a convenience, not magic | ✅ (`NB06`) |

@@ -35,7 +35,7 @@ For a deep dive into the mathematical concepts, analogies, and strictly non-code
 - [x] **02. Neural Networks in 30 Minutes**: Neurons, parameters, gradient descent, training a tiny net.
 
 ### Part 1: Mathematical Building Blocks
-- [x] **03. The Math You'll Actually Need**: A from-zero primer — reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation. Every symbol the course uses, with pictures.
+- [x] **03. The Math You'll Actually Need**: A from-zero primer — reading formulas & symbols, Σ, exponentials & *e*, logarithms, vectors (length/angle/cosine), mean & variance, derivatives/slopes, probability & expectation, **Greek letters & remaining notation (∇, ᵀ, ln)**, **sine/cosine waves**. Every symbol the course uses, with pictures.
 - [x] **04. Tensors & Linear Algebra**: Matrix operations, dimensionality tracking, dot products, the row×column matmul mechanic, softmax step by step.
 - [x] **05. Probability & Calculus**: Softmax, cross-entropy, gradients.
 - [x] **06. Backpropagation From Scratch**: The chain rule by hand in raw NumPy, finite-difference checks, SGD & Adam from scratch, verified against autograd.
