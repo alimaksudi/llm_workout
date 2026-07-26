@@ -51,41 +51,45 @@ taught from zero in notebook 03, the math primer.)
 - [x] **08. Positional Encoding**: Injecting sequence order (Sin/Cos vs. RoPE — from the 2-D toy to the complex-multiply implementation).
 
 ### Part 3: The Attention Engine
-- [x] **09. Attention Mechanisms**: Scaled dot-product, self-attention, multi-head, causal masking.
+- [x] **09. Self-Attention**: Q/K/V as learnable projections, scaled dot-product read stage by stage, one head end to end.
+- [x] **10. Multi-Head Attention & Causal Masking**: The head reshape walked axis by axis, why heads specialize, causal masking, and the O(T²) bill that all of Part 7 exists to pay down.
 
 ### Part 4: Assembling the Transformer
-- [x] **10. The Encoder Layer**: Residual connections, RMSNorm, the FFN — and SwiGLU built from scratch.
-- [x] **11. The Decoder Layer**: Masked attention and (historical) cross-attention.
-- [x] **12. The Full Transformer**: Putting it all together (decoder-only).
-- [x] **13. Assemble Your Decoder-Only GPT**: Wire the real components into the working GPT, learn weight tying, and prove it equals the library `GPT`.
+- [x] **11. The Encoder Layer**: Residual connections, RMSNorm, the FFN — and SwiGLU built from scratch.
+- [x] **12. The Decoder Layer**: Masked attention and (historical) cross-attention.
+- [x] **13. The Full Transformer**: Putting it all together (decoder-only).
+- [x] **14. Assemble Your Decoder-Only GPT**: Wire the real components into the working GPT, learn weight tying, and prove it equals the library `GPT`.
 
 ### Part 5: Training Your Model
-- [x] **14. Next-Token Prediction & Cross-Entropy Loss**: How wrongness is measured.
-- [x] **15. The Training Loop**: AdamW, backprop, LR schedules (warmup + cosine), and what big runs add.
-- [x] **16. Train Your Own GPT (Capstone)**: Train the model you built, end to end — with a proof that the library block equals your notebook code.
-- [x] **17. When Training Goes Wrong**: A debugging clinic — four classic failures, their fingerprints, and the one-line checks that diagnose them.
-- [x] **18. Decoding & Sampling**: Greedy, temperature, top-k, top-p, repetition penalty.
-- [x] **19. Evaluating a Language Model**: Perplexity, held-out loss, benchmarks.
+- [x] **15. From Corpus to Token Stream**: The data pipeline nobody shows you — sourcing and mixtures, quality filtering, exact + MinHash dedup, training your Module 2.1 BPE on a real corpus, `uint16` streams, packing with EOS boundaries, and a contamination check that proves your held-out set is really held out.
+- [x] **16. Next-Token Prediction & Cross-Entropy Loss**: How wrongness is measured.
+- [x] **17. The Training Loop**: AdamW, backprop, LR schedules (warmup + cosine), and what big runs add.
+- [x] **18. Train Your Own GPT (Capstone)**: Train the model you built, end to end — with a proof that the library block equals your notebook code.
+- [x] **19. When Training Goes Wrong**: A debugging clinic — four classic failures, their fingerprints, and the one-line checks that diagnose them.
+- [x] **20. Decoding & Sampling**: Greedy, temperature, top-k, top-p, repetition penalty.
+- [x] **21. Evaluating a Language Model**: Perplexity, held-out loss, benchmarks.
+- [x] **22. Scaling Laws**: Params × data × compute, power laws, and Chinchilla-optimal budgets — the answer to "is my model bad, or is it just small?"
 
 ### Part 6: Fine-Tuning & Alignment
-- [x] **20. Supervised Fine-Tuning (SFT)**: Turning a base model into a chatbot (conceptual).
-- [x] **21. Parameter-Efficient Fine-Tuning (LoRA)**: Cheap fine-tuning with low-rank adapters — hands-on, on your own capstone checkpoint.
-- [x] **22. Preference Alignment (DPO)**: Aligning to human preferences (conceptual).
+- [x] **23. Supervised Fine-Tuning (SFT)**: Turning a base model into a chatbot (conceptual).
+- [x] **24. Parameter-Efficient Fine-Tuning (LoRA)**: Cheap fine-tuning with low-rank adapters — hands-on, on your own capstone checkpoint.
+- [x] **25. Reward Models & RLHF**: Bradley–Terry preferences, a real reward model trained on your own checkpoint, the KL-leashed objective, and reward hacking demonstrated live.
+- [x] **26. Preference Alignment (DPO)**: The same objective as 25, solved on paper into a single supervised loss (conceptual).
 
 ### Part 7: Inference Optimization
-- [x] **23. KV Caching**: Optimizing autoregressive generation speed.
-- [x] **24. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
-- [x] **25. FlashAttention**: Memory tiling and hardware-aware attention.
+- [x] **27. KV Caching**: Optimizing autoregressive generation speed.
+- [x] **28. Advanced Attention**: GQA (Grouped Query) and MQA (Multi-Query).
+- [x] **29. FlashAttention**: Memory tiling and hardware-aware attention.
 
 ### Part 8: Scaling the Architecture
-- [x] **26. Mixture of Experts (MoE)**: Sparse routing for scaling.
-- [x] **27. Scaling Laws**: Why params × data × compute work, and Chinchilla-optimal budgets.
+- [x] **30. Mixture of Experts (MoE)**: Sparse routing for scaling.
+- [ ] **Training on many GPUs**: DDP, FSDP/ZeRO sharding, and the memory bill. *(planned)*
 
 ### Part 9: Production & Serving
-- [x] **28. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
-- [x] **29. Speculative Decoding**: Fast inference with draft vs. target models.
-- [x] **30. PagedAttention & Continuous Batching**: vLLM-style serving.
-- [x] **31. Graduation — Reading a Real LLM**: Map your library onto Llama-3 and GPT-2, count Llama-3-8B's parameters by hand, and walk a reading list of real model source.
+- [x] **31. Quantization Fundamentals**: Absmax, zero-point, and memory savings.
+- [x] **32. Speculative Decoding**: Fast inference with draft vs. target models.
+- [x] **33. PagedAttention & Continuous Batching**: vLLM-style serving.
+- [x] **34. Graduation — Reading a Real LLM**: Map your library onto Llama-3 and GPT-2, count Llama-3-8B's parameters by hand, and walk a reading list of real model source.
 
 ---
 
@@ -95,21 +99,21 @@ taught from zero in notebook 03, the math primer.)
 > Requires `pip install -e ".[applied]"`. See [CURRICULUM_PART_II.md](./CURRICULUM_PART_II.md) for the full blueprint.
 
 ### Part A: Using LLMs in Practice
-- [x] **32. Calling a Model**: Chat interface, roles, tokens, temperature, streaming.
-- [x] **33. Structured Output**: JSON prompting, parsing, schema validation, retries, Pydantic.
+- [x] **35. Calling a Model**: Chat interface, roles, tokens, temperature, streaming.
+- [x] **36. Structured Output**: JSON prompting, parsing, schema validation, retries, Pydantic.
 
 ### Part B: Prompt Engineering
-- [x] **34. Prompt Engineering**: Zero/few-shot, chain-of-thought, self-consistency, reliability, injection defense.
+- [x] **37. Prompt Engineering**: Zero/few-shot, chain-of-thought, self-consistency, reliability, injection defense.
 
 ### Part C: Embeddings & Semantic Search
-- [x] **35. Embeddings & Semantic Search**: Sentence embeddings, cosine similarity, brute-force vector index, k-means, PCA visualization.
+- [x] **38. Embeddings & Semantic Search**: Sentence embeddings, cosine similarity, brute-force vector index, k-means, PCA visualization.
 
 ### Part D: Retrieval-Augmented Generation (RAG)
-- [x] **36. RAG — Retrieval**: Why RAG, chunking strategies, dense search, BM25 from scratch, hybrid RRF retrieval.
-- [x] **37. RAG — Generation (Capstone)**: Cross-encoder reranking, context construction, lost-in-the-middle, citations, end-to-end RAG system.
+- [x] **39. RAG — Retrieval**: Why RAG, chunking strategies, dense search, BM25 from scratch, hybrid RRF retrieval.
+- [x] **40. RAG — Generation (Capstone)**: Cross-encoder reranking, context construction, lost-in-the-middle, citations, end-to-end RAG system.
 
 ### Part E: Evaluating LLM Systems
-- [x] **38. Evaluating LLM Systems**: Exact match, token F1, semantic similarity, faithfulness, LLM-as-judge, hallucination detection, regression testing.
+- [x] **41. Evaluating LLM Systems**: Exact match, token F1, semantic similarity, faithfulness, LLM-as-judge, hallucination detection, regression testing.
 
 ---
 

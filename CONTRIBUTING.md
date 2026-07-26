@@ -54,9 +54,16 @@ for "the optimized path must match the simple path" checks.
   order. The numbers follow [CURRICULUM.md](./CURRICULUM.md) — that file is the
   source of truth, not the other way around. **Inserting a module is not a
   one-file change:** renumber every downstream notebook to keep the sequence
-  gapless, add the row to the CURRICULUM.md module→file map, and grep for stale
+  gapless, add the row to the CURRICULUM.md module→file map, and update stale
   cross-references (`Module X.Y`, `NBnn`, `notebooks/nn_`) across `notebooks/`,
-  `docs/`, and the READMEs before committing.
+  `docs/`, and the READMEs. Then verify with:
+
+  ```bash
+  python scripts/check_references.py
+  ```
+
+  It fails on any notebook path or `Module X.Y` that no longer resolves, and on
+  gaps or duplicates in the numbering. CI runs it on every pull request.
 - **Keep notebooks runnable top-to-bottom** with no hidden state. Execute a
   notebook to verify it runs, then **clear outputs before committing**
   (`jupyter nbconvert --clear-output --inplace notebooks/**/*.ipynb`) so diffs stay
