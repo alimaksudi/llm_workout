@@ -83,7 +83,7 @@ how many distinct tokens exist (often 50k–130k).
 **Embedding** *(2.1)* — the vector of numbers representing a token's meaning. The
 embedding table is a big lookup: one row per token.
 
-**Context window / sequence length** *(3.1)* — how many tokens the model can look at
+**Context window / sequence length** *(3.2)* — how many tokens the model can look at
 at once.
 
 **Logits** *(1.3, 5.1)* — the raw, unnormalized scores the model outputs — one per
@@ -123,7 +123,7 @@ teach a model to chat.
 **LoRA / PEFT** *(6.2)* — fine-tuning by training a small number of *added* parameters
 while the original weights stay frozen. Cheap enough to run on consumer hardware.
 
-**Alignment / RLHF / DPO** *(6.3)* — training a model to match human *preferences*
+**Alignment / RLHF / DPO** *(6.3, 6.4)* — training a model to match human *preferences*
 (helpful, harmless), not just to imitate text.
 
 **Inference** *(Part 7)* — *using* a trained model to produce output, as opposed to

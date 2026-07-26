@@ -6,6 +6,21 @@ on:
   pull_request:
 
 jobs:
+  references:
+    # CURRICULUM.md is the source of truth for sequencing, and inserting a module
+    # means renumbering every downstream notebook plus its cross-references. That is
+    # easy to get 90% right, so this asserts that every notebook path and "Module X.Y"
+    # mentioned anywhere in the repo still resolves. Pure stdlib, so it's seconds.
+    name: Curriculum references resolve
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check cross-references
+        run: python scripts/check_references.py
+
   test:
     name: Library tests
     runs-on: ubuntu-latest

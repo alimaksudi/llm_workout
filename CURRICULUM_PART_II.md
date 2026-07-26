@@ -1,9 +1,9 @@
 # 🧰 LLM Workout — Part II: Applied LLM Engineering (Proposed)
 
-> **Status: PROPOSED OUTLINE — not yet built.** This is the blueprint for a
-> second track, the way [CURRICULUM.md](./CURRICULUM.md) was the blueprint for
-> Part I. Nothing here is written yet; this document is for agreeing on scope and
-> sequence before any notebook is created.
+> **Status: Sections A–E are BUILT** (notebooks `35`–`41`). Sections **F (Agents)**
+> and **G (Production)** remain outlined but unwritten. This document is the blueprint
+> for the second track, the way [CURRICULUM.md](./CURRICULUM.md) is for Part I; the
+> per-module tables below mark what exists and what doesn't.
 
 ## Why a Part II
 
@@ -31,8 +31,8 @@ is that missing half.
   models as black boxes — the *systems* around them are what we build.)
 - **First scope: the RAG spine (Sections A–E).** Using LLMs → Prompting →
   Embeddings/Search → RAG → Evaluation. Agents (F) and Production (G) come later.
-- **Numbering:** continues the flat scheme — Part II notebooks are `30+` in
-  `notebooks/`.
+- **Numbering:** continues the flat scheme — Part II notebooks are `35`–`41`, in
+  `notebooks/10_applied/`.
 
 ### Verified local stack (probed, works on CPU)
 
@@ -51,20 +51,20 @@ notebook-execution check.
 
 | Notebook | Covers | Needs |
 | --- | --- | --- |
-| `30_calling_a_model` | A.1 Calling a model + A.2 decoding in practice | local LLM |
-| `31_structured_output` | A.3 JSON / schema output + validation + retries | local LLM |
-| `32_prompt_engineering` | B.1 zero/few-shot · B.2 chain-of-thought · B.3 reliability | local LLM |
-| `33_embeddings_and_semantic_search` | C.1 embeddings · C.2 from-scratch search · C.3 clustering | embeddings |
-| `34_rag_retrieval` | D.1 why RAG · D.2 chunking · D.3 dense/keyword/hybrid retrieval | embeddings |
-| `35_rag_generation` | D.4 reranking · D.5 context construction · D.6 end-to-end capstone | embeddings + LLM |
-| `36_evaluating_llm_systems` | E.1–E.4 groundedness/faithfulness, LLM-as-judge, hallucination, regression | LLM |
+| `35_calling_a_model` | A.1 Calling a model + A.2 decoding in practice | local LLM |
+| `36_structured_output` | A.3 JSON / schema output + validation + retries | local LLM |
+| `37_prompt_engineering` | B.1 zero/few-shot · B.2 chain-of-thought · B.3 reliability | local LLM |
+| `38_embeddings_and_semantic_search` | C.1 embeddings · C.2 from-scratch search · C.3 clustering | embeddings |
+| `39_rag_retrieval` | D.1 why RAG · D.2 chunking · D.3 dense/keyword/hybrid retrieval | embeddings |
+| `40_rag_generation` | D.4 reranking · D.5 context construction · D.6 end-to-end capstone | embeddings + LLM |
+| `41_evaluating_llm_systems` | E.1–E.4 groundedness/faithfulness, LLM-as-judge, hallucination, regression | LLM |
 
 ---
 
 ## Proposed learning path
 
-Legend: every module below is 🟢 **proposed / not yet written**. "Builds on" points
-to Part I modules where relevant.
+Legend: modules in Sections **A–E** are ✅ **built**; Sections **F–G** are 🟢
+**proposed / not yet written**. "Builds on" points to Part I modules where relevant.
 
 ### Part A — Using LLMs in Practice
 *Goal: drive a model as a black box and understand its knobs and costs.*
@@ -72,7 +72,7 @@ to Part I modules where relevant.
 | # | Module | Prerequisites | You will learn | After this you can |
 |---|--------|---------------|----------------|--------------------|
 | A.1 | **Calling a model** | Part I (or none) | chat vs. completion, messages/roles, tokens, latency & cost basics, streaming | call a local or hosted LLM and reason about token cost |
-| A.2 | **Decoding in practice** | Part I 5.4 (Decoding & Sampling) | applying temperature/top-p/stop-sequences via an API; determinism vs. creativity | tune generation for a task |
+| A.2 | **Decoding in practice** | Part I 5.5 (Decoding & Sampling) | applying temperature/top-p/stop-sequences via an API; determinism vs. creativity | tune generation for a task |
 | A.3 | **Structured output** | A.1 | JSON output, schema-constrained decoding, parsing & validation, retries on bad output | get reliable machine-readable output |
 
 ### Part B — Prompt Engineering
@@ -110,7 +110,7 @@ to Part I modules where relevant.
 
 | # | Module | Prereq | You will learn | After this you can |
 |---|--------|--------|----------------|--------------------|
-| E.1 | **Why eval is hard** | Part I 5.5 (Evaluation) | open-ended output, no single ground truth, beyond perplexity | frame an eval for a real task |
+| E.1 | **Why eval is hard** | Part I 5.6 (Evaluation) | open-ended output, no single ground truth, beyond perplexity | frame an eval for a real task |
 | E.2 | **RAG/answer metrics** | D.6 | groundedness, faithfulness, relevance, answer correctness | quantify a RAG system's quality |
 | E.3 | **LLM-as-judge** | E.1 | using a model to grade outputs, rubric design, bias/limits | build scalable automated eval |
 | E.4 | **Hallucination detection & regression testing** | E.2 | detecting unsupported claims, building an eval set, catching regressions in CI | keep quality from silently degrading |
@@ -147,6 +147,6 @@ Part I as the (small, local) generator, closing the loop across both tracks.
 
 ## Status
 
-Build decisions are confirmed (see above) and the local stack is verified.
-Building Sections **A–E** as notebooks `27–33`. Sections **F (Agents)** and
-**G (Production)** remain outlined-but-unbuilt, to follow once the spine lands.
+Sections **A–E** are built as notebooks `35`–`41` and run in their own CI lane.
+Sections **F (Agents)** and **G (Production)** remain outlined-but-unbuilt; tool /
+function calling (F.1) is the highest-value next addition.

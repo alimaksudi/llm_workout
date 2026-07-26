@@ -13,7 +13,7 @@ prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 > notebook 03. You should never need to leave this repo to understand a lesson.
 
 > Setup once, from the repo root: `pip install -e ".[notebooks]"` (add `".[applied]"`
-> for Part II, notebooks 31+). Notebooks are committed with outputs cleared — run
+> for Part II, notebooks 35+). Notebooks are committed with outputs cleared — run
 > them to see the plots and results.
 
 ## Part I — Build an LLM from scratch
@@ -33,50 +33,53 @@ prerequisites live in [`../CURRICULUM.md`](../CURRICULUM.md).
 - **08. Positional encoding** — sinusoidal vs. RoPE (2-D toy → complex-multiply implementation).
 
 ### `03_attention/`
-- **09. Attention mechanisms** — scaled dot-product, self-attention, multi-head, causal masking.
+- **09. Self-attention** — Q/K/V as learnable projections, scaled dot-product stage by stage, one head end to end.
+- **10. Multi-head attention & causal masking** — the head reshape axis by axis, causal masking, and the O(T²) bill.
 
 ### `04_transformer/`
-- **10. The encoder layer** — residuals, RMSNorm, the FFN, SwiGLU from scratch.
-- **11. The decoder layer** — masked self-attention, (historical) cross-attention.
-- **12. The full transformer** — end-to-end assembly (decoder-only).
-- **13. Assemble your decoder-only GPT** — wire the real parts into the working GPT, weight tying, and prove it equals the library.
+- **11. The encoder layer** — residuals, RMSNorm, the FFN, SwiGLU from scratch.
+- **12. The decoder layer** — masked self-attention, (historical) cross-attention.
+- **13. The full transformer** — end-to-end assembly (decoder-only).
+- **14. Assemble your decoder-only GPT** — wire the real parts into the working GPT, weight tying, and prove it equals the library.
 
 ### `05_training/`
-- **14. Next-token prediction & cross-entropy loss** — how wrongness is measured.
-- **15. The training loop** — AdamW, warmup + cosine schedules, what big runs add.
-- **16. Train your own GPT (capstone)** — train the model you built, end to end.
-- **17. When training goes wrong** — a debugging clinic: four classic failures and their one-line checks.
-- **18. Decoding & sampling** — greedy, temperature, top-k, top-p, repetition penalty.
-- **19. Evaluating a language model** — perplexity, held-out loss, benchmarks.
+- **15. From corpus to token stream** — filtering, dedup, training your BPE on a real corpus, packing, and a contamination check.
+- **16. Next-token prediction & cross-entropy loss** — how wrongness is measured.
+- **17. The training loop** — AdamW, warmup + cosine schedules, what big runs add.
+- **18. Train your own GPT (capstone)** — train the model you built, end to end.
+- **19. When training goes wrong** — a debugging clinic: four classic failures and their one-line checks.
+- **20. Decoding & sampling** — greedy, temperature, top-k, top-p, repetition penalty.
+- **21. Evaluating a language model** — perplexity, held-out loss, benchmarks.
+- **22. Scaling laws** — params × data × compute, Chinchilla-optimal budgets.
 
 ### `06_finetuning/`
-- **20. Supervised fine-tuning (SFT)** — base → chat, loss masking (conceptual).
-- **21. Parameter-efficient fine-tuning (LoRA)** — hands-on, on your own capstone checkpoint.
-- **22. Preference alignment (DPO)** — the DPO loss (conceptual).
+- **23. Supervised fine-tuning (SFT)** — base → chat, loss masking (conceptual).
+- **24. Parameter-efficient fine-tuning (LoRA)** — hands-on, on your own capstone checkpoint.
+- **25. Reward models & RLHF** — Bradley–Terry, a reward model on your own checkpoint, the KL leash, reward hacking.
+- **26. Preference alignment (DPO)** — the DPO loss (conceptual).
 
 ### `07_inference/`
-- **23. KV caching** — fast autoregressive generation.
-- **24. Advanced attention** — MQA & GQA.
-- **25. FlashAttention** — tiling and hardware-aware attention.
+- **27. KV caching** — fast autoregressive generation.
+- **28. Advanced attention** — MQA & GQA.
+- **29. FlashAttention** — tiling and hardware-aware attention.
 
 ### `08_scaling/`
-- **26. Mixture of Experts (MoE)** — sparse routing.
-- **27. Scaling laws** — params × data × compute, Chinchilla-optimal budgets.
+- **30. Mixture of Experts (MoE)** — sparse routing.
 
 ### `09_production/`
-- **28. Quantization fundamentals** — absmax, zero-point, INT8.
-- **29. Speculative decoding** — draft + verify.
-- **30. PagedAttention & continuous batching** — vLLM-style serving.
-- **31. Graduation — reading a real LLM** — map your library onto Llama-3 / GPT-2; count Llama-3-8B's parameters by hand.
+- **31. Quantization fundamentals** — absmax, zero-point, INT8.
+- **32. Speculative decoding** — draft + verify.
+- **33. PagedAttention & continuous batching** — vLLM-style serving.
+- **34. Graduation — reading a real LLM** — map your library onto Llama-3 / GPT-2; count Llama-3-8B's parameters by hand.
 
 ## Part II — Applied LLM engineering
 *Needs `pip install -e ".[applied]"`; these load small pretrained models.*
 
 ### `10_applied/`
-- **32. Calling a model** — chat interface, roles, tokens, streaming.
-- **33. Structured output** — JSON, schema validation, retries, Pydantic.
-- **34. Prompt engineering** — zero/few-shot, chain-of-thought, self-consistency, injection defense.
-- **35. Embeddings & semantic search** — cosine similarity, a brute-force vector index, k-means, PCA.
-- **36. RAG — retrieval** — chunking, dense search, BM25 from scratch, hybrid RRF.
-- **37. RAG — generation (capstone)** — reranking, context construction, citations, end-to-end.
-- **38. Evaluating LLM systems** — exact match, token F1, faithfulness, LLM-as-judge, hallucination detection.
+- **35. Calling a model** — chat interface, roles, tokens, streaming.
+- **36. Structured output** — JSON, schema validation, retries, Pydantic.
+- **37. Prompt engineering** — zero/few-shot, chain-of-thought, self-consistency, injection defense.
+- **38. Embeddings & semantic search** — cosine similarity, a brute-force vector index, k-means, PCA.
+- **39. RAG — retrieval** — chunking, dense search, BM25 from scratch, hybrid RRF.
+- **40. RAG — generation (capstone)** — reranking, context construction, citations, end-to-end.
+- **41. Evaluating LLM systems** — exact match, token F1, faithfulness, LLM-as-judge, hallucination detection.
